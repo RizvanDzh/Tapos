@@ -57,6 +57,68 @@
                     {
                         "arrowParameter": true
                     }
+                ],
+                "@typescript-eslint/explicit-member-accessibility": [
+                    "error",
+                    {
+                        "accessibility": "explicit",
+                        "overrides": {
+                            "accessors": "explicit",
+                            "constructors": "off",
+                            "methods": "explicit",
+                            "properties": "explicit",
+                            "parameterProperties": "explicit"
+                        },
+                        "ignoredMethodNames": [
+                            "ngOnInit",
+                            "ngOnChanges",
+                            "ngAfterViewInit",
+                            "ngAfterContentInit",
+                            "ngAfterViewChecked",
+                            "ngAfterContentChecked",
+                            "ngOnDestroy"
+                        ]
+                    }
+                ],
+                "@typescript-eslint/naming-convention": [
+                    "error",
+                    {
+                        "selector": "memberLike",
+                        "modifiers": ["private"],
+                        "format": ["camelCase"],
+                        "leadingUnderscore": "require"
+                    },
+                    {
+                        "selector": "memberLike",
+                        "modifiers": ["public"],
+                        "format": ["camelCase"]
+                    },
+                    {
+                        "selector": ["class", "typeAlias"],
+                        "format": ["PascalCase"]
+                    },
+                    {
+                        "selector": "interface",
+                        "format": ["PascalCase"],
+                        "custom": {
+                            "regex": "^I[A-Z]",
+                            "match": true
+                        }
+                    },
+                    {
+                        "selector": "enum",
+                        "format": ["PascalCase"],
+                        "custom": {
+                            "regex": "^E[A-Z]",
+                            "match": true
+                        }
+                    }
+                ],
+                "@typescript-eslint/array-type": [
+                    "error",
+                    {
+                        "default": "array"
+                    }
                 ]
             }
         },
