@@ -1,0 +1,41 @@
+<header class="header">
+    <div class="header__left-part">
+        <div class="header__main-icon">
+            <a href="">
+                <img src="assets/images/gazprom-icon.svg" alt="Газпром Нефть" />
+            </a>
+        </div>
+        <div class="header__project-name">
+            <span>СОП АТ</span>
+        </div>
+        <div class="header__group-page group-page">
+            <prizm-dropdown-host [(isOpen)]="isOpened" prizmDropdownHostWidth="auto" class="group-page__dropdown-host">
+                <span class="group-page__name">АТОТ</span>
+                <prizm-icons
+                    class="group-page__chevron"
+                    [ngClass]="{ closed: !isOpened }"
+                    [size]="20"
+                    [name]="'temp-chevrons-dropdown-small'"
+                ></prizm-icons>
+            </prizm-dropdown-host>
+        </div>
+    </div>
+    <div class="header__right-part">
+        <div class="header__calendar">
+            <prizm-input-layout>
+                <prizm-input-layout-month [formControl]="control"></prizm-input-layout-month>
+            </prizm-input-layout>
+        </div>
+        <div class="header__user">
+            <img src="assets/images/avatar.svg" alt="иконка пользователя" />
+        </div>
+    </div>
+</header>
+
+<ng-template $dropdown>
+    <div class="menu">
+        <div class="menu__option">
+            <span class="menu__title"></span>
+        </div>
+    </div>
+</ng-template>

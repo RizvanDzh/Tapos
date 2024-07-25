@@ -5,19 +5,40 @@
   "prefix": "tapos",
   "sourceRoot": "apps/tapos/src",
   "tags": [],
+  "implicitDependencies": [
+    "assets"
+  ],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/tapos",
         "index": "apps/tapos/src/index.html",
         "browser": "apps/tapos/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": [
+          "zone.js"
+        ],
         "tsConfig": "apps/tapos/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/tapos/src/favicon.ico", "apps/tapos/src/assets"],
-        "styles": ["apps/tapos/src/styles.scss"],
+        "assets": [
+          "apps/tapos/src/favicon.ico",
+          "apps/tapos/src/assets",
+          {
+            "input": "libs/tapos/shared/assets/src/assets",
+            "glob": "**/*",
+            "output": "assets"
+          }
+        ],
+        "styles": [
+          "apps/tapos/src/styles.scss",
+          "node_modules/@prizm-ui/theme/src/styles/styles.less",
+          "node_modules/@prizm-ui/components/src/styles/styles.less",
+          "node_modules/@prizm-ui/components/src/styles/icons/icons.less",
+          "node_modules/@prizm-ui/icons/src/styles/styles.less"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -67,7 +88,9 @@
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
         "jestConfig": "apps/tapos/jest.config.ts"
       }

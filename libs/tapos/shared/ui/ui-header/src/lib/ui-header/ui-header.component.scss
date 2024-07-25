@@ -1,0 +1,80 @@
+@use '@tapos/styles' as styles;
+
+.header {
+    background-color: #303340;
+    height: 64px;
+    padding: 0 16px;
+    @include styles.flex-style($align-items: center, $justify-content: space-between);
+
+    &__left-part {
+        @include styles.flex-style($align-items: center, $justify-content: center);
+        height: 100%;
+    }
+
+    &__right-part {
+        @include styles.flex-style($align-items: center, $justify-content: center);
+        height: 100%;
+    }
+
+    &__main-icon {
+        padding: 0 16px 0 0;
+    }
+
+    &__project-name {
+        @include styles.flex-style($align-items: center);
+        height: 100%;
+        padding: 0 24px;
+        border-right: 1px solid #50546b;
+        border-left: 1px solid #50546b;
+
+        span {
+            font-weight: 800;
+            font-size: 16px;
+            color: var(--prizm-text-icon-primary);
+        }
+    }
+
+    &__calendar {
+        @include styles.flex-style($align-items: center);
+        height: 100%;
+        padding: 0 16px 0 0;
+        border-right: 1px solid #50546b;
+    }
+
+    &__user {
+        padding: 0 0 0 16px;
+
+        img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            vertical-align: middle;
+        }
+    }
+}
+
+.group-page {
+    @include styles.flex-style($align-items: center);
+    height: 100%;
+    min-width: 126px;
+    padding: 0 24px;
+    border-right: 1px solid #50546b;
+
+    &__dropdown-host {
+        ::ng-deep {
+            .block {
+                @include styles.flex-style($align-items: center, $justify-content: space-between);
+            }
+        }
+    }
+
+    &__name {
+        font-weight: 600;
+        font-size: 14px;
+        color: var(--prizm-text-icon-primary);
+    }
+
+    &__chevron {
+        color: #777b92;
+    }
+}

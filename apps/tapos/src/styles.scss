@@ -1,1 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+    scrollbar-color: var(--prizm-background-fill-secondary) var(--prizm-text-icon-link);
+    scrollbar-width: thin;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    font-family: 'Inter';
+    font-style: normal;
+    background-color: var(--prizm-background-fill-secondary);
+    color: var(--prizm-text-icon-primary);
+}
+
+*::-webkit-scrollbar {
+    width: 18px;
+    height: 18px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: var(--prizm-text-icon-link);
+    border-radius: 20px;
+    border: 5px solid var(--prizm-background-fill-secondary);
+}
