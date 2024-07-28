@@ -30,7 +30,7 @@
         span {
             font-weight: 800;
             font-size: 16px;
-            color: var(--prizm-text-icon-primary);
+            color: #ffffff;
         }
     }
 
@@ -56,11 +56,17 @@
 .group-page {
     @include styles.flex-style($align-items: center);
     height: 100%;
-    min-width: 126px;
+    width: 126px;
     padding: 0 24px;
     border-right: 1px solid #50546b;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #3f4759;
+    }
 
     &__dropdown-host {
+        height: 100%;
         ::ng-deep {
             .block {
                 @include styles.flex-style($align-items: center, $justify-content: space-between);
@@ -71,10 +77,33 @@
     &__name {
         font-weight: 600;
         font-size: 14px;
-        color: var(--prizm-text-icon-primary);
+        color: #ffffff;
     }
 
     &__chevron {
         color: #777b92;
+    }
+}
+
+.menu {
+    @include styles.flex-style($flex-direction: column);
+    width: 126px;
+    background-color: #303340;
+
+    &__option {
+        width: 100%;
+        padding: 8px 24px;
+        cursor: pointer;
+        border: 1px solid #50546b;
+
+        &:hover {
+            background-color: #3f4759;
+        }
+    }
+
+    &__title {
+        font-weight: 600;
+        font-size: 14px;
+        color: #ffffff;
     }
 }

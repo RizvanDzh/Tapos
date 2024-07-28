@@ -8,8 +8,15 @@
         <div class="header__project-name">
             <span>СОП АТ</span>
         </div>
-        <div class="header__group-page group-page">
-            <prizm-dropdown-host [(isOpen)]="isOpened" prizmDropdownHostWidth="auto" class="group-page__dropdown-host">
+        <div class="header__group-page group-page" (click)="isOpened = !isOpened">
+            <prizm-dropdown-host
+                [(isOpen)]="isOpened"
+                prizmDropdownHostWidth="auto"
+                [content]="dropdownMenu"
+                [placement]="'b'"
+                #prizmDropdownHost
+                class="group-page__dropdown-host"
+            >
                 <span class="group-page__name">АТОТ</span>
                 <prizm-icons
                     class="group-page__chevron"
@@ -21,9 +28,12 @@
         </div>
     </div>
     <div class="header__right-part">
-        <div class="header__calendar">
-            <prizm-input-layout>
-                <prizm-input-layout-month [formControl]="control"></prizm-input-layout-month>
+        <div class="header__calendar calendar">
+            <prizm-input-layout class="calendar__layout">
+                <prizm-input-layout-date
+                    [formControl]="control"
+                    class="calendar__layout-month"
+                ></prizm-input-layout-date>
             </prizm-input-layout>
         </div>
         <div class="header__user">
@@ -32,10 +42,10 @@
     </div>
 </header>
 
-<ng-template $dropdown>
+<ng-template #dropdownMenu>
     <div class="menu">
-        <div class="menu__option">
-            <span class="menu__title"></span>
+        <div class="menu__option" *ngFor="let option of menuOptions">
+            <span class="menu__title">{{ option.title }}</span>
         </div>
     </div>
 </ng-template>

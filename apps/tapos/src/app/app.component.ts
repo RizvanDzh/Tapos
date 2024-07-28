@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { PrizmThemeModule } from '@prizm-ui/theme';
 import { UiHeaderComponent } from '@tapos/ui-header';
+
 @Component({
     standalone: true,
-    imports: [RouterModule, UiHeaderComponent, PrizmThemeModule],
+    imports: [RouterModule, UiHeaderComponent],
     selector: 'tapos-root',
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss'
