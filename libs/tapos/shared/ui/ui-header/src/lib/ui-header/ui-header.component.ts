@@ -2,15 +2,11 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UtilIconsModule } from '@tapos/util-icons';
 import { FormsModule, ReactiveFormsModule, UntypedFormControl } from '@angular/forms';
-import {
-    PrizmDay,
-    PrizmDropdownHostModule,
-    PrizmInputLayoutDateComponent,
-    PrizmInputTextModule
-} from '@prizm-ui/components';
+import { PrizmDay, PrizmInputLayoutDateComponent, PrizmInputTextModule } from '@prizm-ui/components';
 import { PrizmIconsComponent, PrizmIconsFullComponent } from '@prizm-ui/icons';
 import { ISection, SECTIONS } from '@tapos/util-consts';
 import { PrizmThemeService } from '@prizm-ui/theme';
+import { RouterLink, RouterModule } from '@angular/router';
 
 @Component({
     selector: 'tapos-ui-header',
@@ -22,9 +18,10 @@ import { PrizmThemeService } from '@prizm-ui/theme';
         PrizmInputTextModule,
         FormsModule,
         ReactiveFormsModule,
-        PrizmDropdownHostModule,
         PrizmIconsComponent,
-        PrizmIconsFullComponent
+        PrizmIconsFullComponent,
+        RouterLink,
+        RouterModule
     ],
     templateUrl: './ui-header.component.html',
     styleUrl: './ui-header.component.scss',
@@ -35,7 +32,7 @@ export class UiHeaderComponent implements OnInit {
 
     public isOpened: boolean = false;
 
-    public menuOptions: ISection[] = [...SECTIONS];
+    public menuOptions: ISection[] = SECTIONS;
 
     constructor(private _theme: PrizmThemeService) {}
 

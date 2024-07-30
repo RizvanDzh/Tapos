@@ -8,23 +8,16 @@
         <div class="header__project-name">
             <span>СОП АТ</span>
         </div>
-        <div class="header__group-page group-page" (click)="isOpened = !isOpened">
-            <prizm-dropdown-host
-                [(isOpen)]="isOpened"
-                prizmDropdownHostWidth="auto"
-                [content]="dropdownMenu"
-                [placement]="'b'"
-                #prizmDropdownHost
-                class="group-page__dropdown-host"
-            >
-                <span class="group-page__name">АТОТ</span>
-                <prizm-icons
-                    class="group-page__chevron"
-                    [ngClass]="{ closed: !isOpened }"
-                    [size]="20"
-                    [name]="'temp-chevrons-dropdown-small'"
-                ></prizm-icons>
-            </prizm-dropdown-host>
+        <div class="header__group-page group-page" (click)="isOpened = !isOpened" [ngClass]="{ _opened: isOpened }">
+            <div *ngFor="let option of menuOptions" class="group-page__option" routerLinkActive="_active">
+                <a class="group-page__option-link" [routerLink]="'/' + option.url">{{ option.title }}</a>
+            </div>
+            <prizm-icons
+                class="group-page__chevron"
+                [ngClass]="{ closed: !isOpened }"
+                [size]="20"
+                [name]="'temp-chevrons-dropdown-small'"
+            ></prizm-icons>
         </div>
     </div>
     <div class="header__right-part">
@@ -41,11 +34,3 @@
         </div>
     </div>
 </header>
-
-<ng-template #dropdownMenu>
-    <div class="menu">
-        <div class="menu__option" *ngFor="let option of menuOptions">
-            <span class="menu__title">{{ option.title }}</span>
-        </div>
-    </div>
-</ng-template>
