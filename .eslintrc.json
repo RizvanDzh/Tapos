@@ -35,13 +35,7 @@
                     }
                 ],
                 // Disallow explicit type declarations for variables or parameters initialized to a number, string, or boolean.
-                "@typescript-eslint/no-inferrable-types": [
-                    "error",
-                    {
-                        // Whether to ignore parameter typing in function declaration.
-                        "ignoreParameters": true
-                    }
-                ],
+                "@typescript-eslint/no-inferrable-types": "off",
                 "@typescript-eslint/no-explicit-any": "error",
                 "@typescript-eslint/no-for-in-array": "error",
                 "@typescript-eslint/no-empty-function": "error",
@@ -55,6 +49,10 @@
                 "@typescript-eslint/typedef": [
                     "error",
                     {
+                        "parameter": true,
+                        "variableDeclaration": true,
+                        "propertyDeclaration": true,
+                        "memberVariableDeclaration": true,
                         "arrowParameter": true
                     }
                 ],

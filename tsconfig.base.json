@@ -1,20 +1,30 @@
 {
-  "compileOnSave": false,
-  "compilerOptions": {
-    "rootDir": ".",
-    "sourceMap": true,
-    "declaration": false,
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "importHelpers": true,
-    "target": "es2015",
-    "module": "esnext",
-    "lib": ["es2020", "dom"],
-    "skipLibCheck": true,
-    "skipDefaultLibCheck": true,
-    "baseUrl": ".",
-    "paths": {}
-  },
-  "exclude": ["node_modules", "tmp"]
+    "compileOnSave": false,
+    "compilerOptions": {
+        "rootDir": ".",
+        "sourceMap": true,
+        "declaration": false,
+        "moduleResolution": "node",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "importHelpers": true,
+        "target": "es2015",
+        "module": "esnext",
+        "lib": ["es2020", "dom"],
+        "skipLibCheck": true,
+        "skipDefaultLibCheck": true,
+        "baseUrl": ".",
+        "paths": {
+            "@tapos/assets": ["libs/tapos/shared/assets/src/index.ts"],
+            "@tapos/feature-atot": ["libs/tapos/atot/features/feature-atot/src/index.ts"],
+            "@tapos/feature-mnpz": ["libs/tapos/mnpz/features/feature-mnpz/src/index.ts"],
+            "@tapos/feature-otif": ["libs/tapos/otif/features/feature-otif/src/index.ts"],
+            "@tapos/feature-tabs": ["libs/tapos/otif/features/feature-tabs/src/index.ts"],
+            "@tapos/styles": ["libs/tapos/shared/styles/index.scss"],
+            "@tapos/ui-header": ["libs/tapos/shared/ui/ui-header/src/index.ts"],
+            "@tapos/util-consts": ["libs/tapos/shared/util/util-consts/src/index.ts"],
+            "@tapos/util-icons": ["libs/tapos/shared/util/util-icons/src/index.ts"]
+        }
+    },
+    "exclude": ["node_modules", "tmp"]
 }

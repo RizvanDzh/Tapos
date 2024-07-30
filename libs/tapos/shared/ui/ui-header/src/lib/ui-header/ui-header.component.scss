@@ -1,0 +1,98 @@
+@use '@tapos/styles' as styles;
+
+.header {
+    background-color: #303340;
+    height: 64px;
+    padding: 0 16px;
+    @include styles.flex-style($align-items: center, $justify-content: space-between);
+
+    &__left-part {
+        @include styles.flex-style($align-items: center, $justify-content: center);
+        height: 100%;
+    }
+
+    &__right-part {
+        @include styles.flex-style($align-items: center, $justify-content: center);
+        height: 100%;
+    }
+
+    &__main-icon {
+        padding: 0 16px 0 0;
+    }
+
+    &__project-name {
+        @include styles.flex-style($align-items: center);
+        height: 100%;
+        padding: 0 24px;
+        border-right: 1px solid #50546b;
+        border-left: 1px solid #50546b;
+
+        span {
+            font-weight: 800;
+            font-size: 16px;
+            color: #ffffff;
+        }
+    }
+
+    &__calendar {
+        @include styles.flex-style($align-items: center);
+        height: 100%;
+        padding: 0 16px 0 0;
+        border-right: 1px solid #50546b;
+    }
+
+    &__user {
+        padding: 0 0 0 16px;
+
+        img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            vertical-align: middle;
+        }
+    }
+}
+
+.group-page {
+    @include styles.flex-style($flex-direction: column);
+    position: relative;
+    height: 100%;
+    width: 126px;
+    overflow: hidden;
+    cursor: pointer;
+
+    &._opened {
+        overflow: visible;
+        z-index: 10;
+    }
+
+    &__option {
+        flex: 0 0 64px;
+        padding: 0 24px;
+        background-color: #303340;
+        border: 1px solid #50546b;
+
+        &._active {
+            order: -1;
+            border-width: 0 1px 0 0px;
+        }
+    }
+
+    &__option-link {
+        all: unset;
+        font-weight: 600;
+        font-size: 14px;
+        color: #ffffff;
+        @include styles.flex-style($align-items: center);
+        text-decoration: none;
+        height: 100%;
+        width: 80%;
+    }
+
+    &__chevron {
+        color: #777b92;
+        position: absolute;
+        right: 16px;
+        top: 35%;
+    }
+}

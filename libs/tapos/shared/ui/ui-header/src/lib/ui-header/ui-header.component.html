@@ -1,0 +1,36 @@
+<header class="header">
+    <div class="header__left-part">
+        <div class="header__main-icon">
+            <a href="">
+                <img src="assets/images/gazprom-icon.svg" alt="Газпром Нефть" />
+            </a>
+        </div>
+        <div class="header__project-name">
+            <span>СОП АТ</span>
+        </div>
+        <div class="header__group-page group-page" (click)="isOpened = !isOpened" [ngClass]="{ _opened: isOpened }">
+            <div *ngFor="let option of menuOptions" class="group-page__option" routerLinkActive="_active">
+                <a class="group-page__option-link" [routerLink]="'/' + option.url">{{ option.title }}</a>
+            </div>
+            <prizm-icons
+                class="group-page__chevron"
+                [ngClass]="{ closed: !isOpened }"
+                [size]="20"
+                [name]="'temp-chevrons-dropdown-small'"
+            ></prizm-icons>
+        </div>
+    </div>
+    <div class="header__right-part">
+        <div class="header__calendar calendar">
+            <prizm-input-layout class="calendar__layout">
+                <prizm-input-layout-date
+                    [formControl]="control"
+                    class="calendar__layout-month"
+                ></prizm-input-layout-date>
+            </prizm-input-layout>
+        </div>
+        <div class="header__user">
+            <img src="assets/images/avatar.svg" alt="иконка пользователя" />
+        </div>
+    </div>
+</header>
