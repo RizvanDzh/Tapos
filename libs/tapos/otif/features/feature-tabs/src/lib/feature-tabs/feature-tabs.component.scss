@@ -1,0 +1,40 @@
+@use '@tapos/styles' as styles;
+
+.tabs {
+    @include styles.flex-style();
+
+    &__option {
+        flex: 1 1 auto;
+        padding: 16px;
+        background-color: #13151c;
+        @include styles.flex-style($gap: 40px);
+    }
+
+    &__graph {
+        flex: 1 1 auto;
+    }
+}
+
+.info {
+    @include styles.flex-style($flex-direction: column, $justify-content: space-between);
+
+    &__title {
+        @include styles.font-style($font-size: 20px, $line-height: 24px);
+    }
+
+    &__otif-label {
+        @include styles.font-style($font-size: 16px, $color: #777b92);
+    }
+
+    &__percent {
+        @include styles.flex-style($align-items: flex-end, $gap: 4px);
+
+        &-main {
+            @include styles.font-style($font-size: 26px, $font-weight: 800, $line-height: 32px);
+        }
+
+        &-deviation {
+            @include styles.font-style($font-size: 16px, $font-weight: 800, $color: #49ab4d);
+        }
+    }
+}
