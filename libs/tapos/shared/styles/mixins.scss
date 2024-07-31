@@ -5,3 +5,12 @@
     justify-content: $justify-content;
     gap: $gap;
 }
+
+@mixin font-style($font-size: 14px, $font-weight: 600, $line-height: 20px, $color: #ffffff) {
+    font-family: 'Inter';
+    font-style: normal;
+    font-size: $font-size;
+    font-weight: $font-weight;
+    line-height: $line-height;
+    color: $color;
+}
