@@ -1,5 +1,9 @@
-:host {
+.page-atot-sections {
     display: flex;
     flex-direction: column;
     height: 100%;
+
+    &__section {
+        flex: 1;
+    }
 }

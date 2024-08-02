@@ -1,3 +1,5 @@
+export type SectionType = 'IF' | 'OT' | 'Ответственные за отклонения';
+
 export interface ISection {
     title: ESectionTitles;
     url: string;
