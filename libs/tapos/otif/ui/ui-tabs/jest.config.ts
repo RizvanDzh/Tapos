@@ -1,9 +1,9 @@
 /* eslint-disable */
 export default {
-    displayName: 'feature-tabs',
+    displayName: 'ui-tabs',
     preset: '../../../../../jest.preset.js',
     setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-    coverageDirectory: '../../../../../coverage/libs/tapos/otif/features/feature-tabs',
+    coverageDirectory: '../../../../../coverage/libs/tapos/otif/ui/ui-tabs',
     transform: {
         '^.+\\.(ts|mjs|js|html)$': [
             'jest-preset-angular',

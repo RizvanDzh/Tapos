@@ -23,10 +23,10 @@
             "@tapos/feature-page-atot": ["libs/tapos/otif/features/feature-page-atot/src/index.ts"],
             "@tapos/feature-page-grs": ["libs/tapos/otif/features/feature-page-grs/src/index.ts"],
             "@tapos/feature-page-upb": ["libs/tapos/otif/features/feature-page-upb/src/index.ts"],
-            "@tapos/feature-tabs": ["libs/tapos/otif/features/feature-tabs/src/index.ts"],
             "@tapos/styles": ["libs/tapos/shared/styles/index.scss"],
             "@tapos/ui-header": ["libs/tapos/shared/ui/ui-header/src/index.ts"],
             "@tapos/ui-switcher": ["libs/tapos/shared/ui/ui-switcher/src/index.ts"],
+            "@tapos/ui-tabs": ["libs/tapos/otif/ui/ui-tabs/src/index.ts"],
             "@tapos/util-consts": ["libs/tapos/shared/util/util-consts/src/index.ts"],
             "@tapos/util-icons": ["libs/tapos/shared/util/util-icons/src/index.ts"]
         }

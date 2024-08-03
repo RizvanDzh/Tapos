@@ -1,7 +1,7 @@
 {
-    "name": "feature-tabs",
+    "name": "ui-tabs",
     "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
-    "sourceRoot": "libs/tapos/otif/features/feature-tabs/src",
+    "sourceRoot": "libs/tapos/otif/ui/ui-tabs/src",
     "prefix": "tapos",
     "tags": [],
     "projectType": "library",
@@ -10,7 +10,7 @@
             "executor": "@nx/jest:jest",
             "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
             "options": {
-                "jestConfig": "libs/tapos/otif/features/feature-tabs/jest.config.ts"
+                "jestConfig": "libs/tapos/otif/ui/ui-tabs/jest.config.ts"
             }
         },
         "lint": {
