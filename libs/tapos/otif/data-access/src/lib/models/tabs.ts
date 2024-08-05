@@ -1,9 +1,9 @@
-import { IOtifGeneralData } from './otif-general-data';
+import { IAtotGeneralData } from './general-data';
 
 export interface ITab {
     title: ETabTitle;
     url: ERouteTab;
-    data?: IOtifGeneralData;
+    data?: IAtotGeneralData;
 }
 
 export enum ETabTitle {

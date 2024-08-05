@@ -15,7 +15,7 @@ import { PrizmSidebarModule, PrizmSwitcherItem, PrizmSwitcherModule } from '@pri
 export class AtotSectionComponent {
     @Input() public sectionType!: SectionType;
 
-    public selectedIndex: number = 2;
+    public selectedIndex: number = 0;
 
     public readonly switchersIf: PrizmSwitcherItem[] = [
         {

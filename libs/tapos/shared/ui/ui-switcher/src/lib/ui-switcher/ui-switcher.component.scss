@@ -1,0 +1,36 @@
+@use '@tapos/styles' as styles;
+
+.switcher {
+    @include styles.flex-style();
+
+    &__item {
+        @include styles.flex-style($align-items: center, $gap: 8px);
+        padding: 10px 16px;
+        border-bottom: 2px solid #31343f;
+        cursor: pointer;
+
+        &.active {
+            border-bottom: 2px solid #337eff;
+
+            .switcher__switcher-button {
+                @include styles.font-style($line-height: 16px);
+            }
+
+            .switcher__swticher-icon {
+                background-color: #337eff;
+                @include styles.font-style($font-size: 12px, $line-height: 16px);
+            }
+        }
+    }
+
+    &__switcher-button {
+        @include styles.font-style($line-height: 16px, $color: #a1a5b7);
+    }
+
+    &__swticher-icon {
+        background-color: #31343f;
+        padding: 2px 4px;
+        border-radius: 16px;
+        @include styles.font-style($font-size: 12px, $line-height: 16px, $color: #a1a5b7);
+    }
+}

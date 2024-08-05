@@ -1,1 +1,13 @@
-<p>ui-switcher works!</p>
+<div class="switcher">
+    <div
+        class="switcher__item"
+        *ngFor="let switcherItem of switcherData"
+        [ngClass]="{ active: switcherItem.switcherName === this.selectedSwitcherName }"
+        (click)="this.switchElem(switcherItem.switcherName)"
+    >
+        <span class="switcher__switcher-button">{{ switcherItem.switcherName }}</span>
+        <ng-container *ngIf="switcherItem.switcherPercentage">
+            <div class="switcher__swticher-icon">{{ switcherItem.switcherPercentage }}%</div>
+        </ng-container>
+    </div>
+</div>

@@ -19,15 +19,8 @@
             </ng-template>
         </div>
         <div class="header__tabs">
-            <tapos-ui-switcher></tapos-ui-switcher>
+            <tapos-ui-switcher *ngIf="sectionType !== 'Ответственные за отклонения'"></tapos-ui-switcher>
         </div>
-        <!-- <div class="header__legend legend">
-            <div class="legend__item">
-                <span class="legend__flag"><img /></span>
-                <span class="legend__label">ГПН</span>
-                <span class="legend__amount">16</span>
-            </div>
-        </div> -->
         <div class="header__switcher switcher">
             <div class="switcher__legend">
                 <div class="switcher__legend-item">
