@@ -1,4 +1,4 @@
-export interface IAtotGeneralData {
+export interface IOtifGeneralData {
     atot: IGeneralData;
 }
 

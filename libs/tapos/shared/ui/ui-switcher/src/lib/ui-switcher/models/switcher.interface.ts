@@ -1,4 +1,5 @@
 export interface ISwitcher {
     switcherName: string;
-    switcherPercentage?: string | undefined;
+    switcherChip?: string;
+    switcherChipIsClosable?: boolean;
 }

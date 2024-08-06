@@ -6,8 +6,8 @@
         (click)="this.switchElem(switcherItem.switcherName)"
     >
         <span class="switcher__switcher-button">{{ switcherItem.switcherName }}</span>
-        <ng-container *ngIf="switcherItem.switcherPercentage">
-            <div class="switcher__swticher-icon">{{ switcherItem.switcherPercentage }}%</div>
+        <ng-container *ngIf="switcherItem.switcherChip">
+            <div class="switcher__swticher-icon">{{ switcherItem.switcherChip }}%</div>
         </ng-container>
     </div>
 </div>

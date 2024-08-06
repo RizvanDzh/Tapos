@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UiTabsComponent } from '@tapos/ui-tabs';
-import { FeaturePageAtotComponent } from '@tapos/feature-page-atot';
+import { UiTabsComponent } from '@tapos/otif/ui-tabs';
+import { FeaturePageAtotComponent } from '@tapos/otif/feature-page-atot';
 
 @Component({
     selector: 'tapos-feature-otif',

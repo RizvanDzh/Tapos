@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
-import { ESectionTitles, SECTIONS_URLS } from '@tapos/util-consts';
-// import { FeatureOtifComponent } from '@tapos/feature-otif';
+import { ESectionTitles, SECTIONS_URLS } from '@tapos/shared/util-consts';
+import { FeatureOtifComponent } from '@tapos/otif/feature-otif';
 
 export const appRoutes: Route[] = [
     {
@@ -10,18 +10,16 @@ export const appRoutes: Route[] = [
     },
     {
         path: SECTIONS_URLS.get(ESectionTitles.OTIF),
-        // component: FeatureOtifComponent
-        // eslint-disable-next-line @typescript-eslint/typedef
-        loadComponent: () => import('@tapos/feature-otif').then((m) => m.FeatureOtifComponent)
+        component: FeatureOtifComponent
     },
     {
         path: SECTIONS_URLS.get(ESectionTitles.ATOT),
         // eslint-disable-next-line @typescript-eslint/typedef
-        loadComponent: () => import('@tapos/feature-atot').then((m) => m.FeatureAtotComponent)
+        loadComponent: () => import('@tapos/atot/feature-atot').then((m) => m.FeatureAtotComponent)
     },
     {
         path: SECTIONS_URLS.get(ESectionTitles.MNPZ),
         // eslint-disable-next-line @typescript-eslint/typedef
-        loadComponent: () => import('@tapos/feature-mnpz').then((m) => m.FeatureMnpzComponent)
+        loadComponent: () => import('@tapos/mnpz/feature-mnpz').then((m) => m.FeatureMnpzComponent)
     }
 ];

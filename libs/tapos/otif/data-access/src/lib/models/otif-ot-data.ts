@@ -1,4 +1,4 @@
-export interface IOtData {
+export interface IOtifOtData {
     deviation: number;
     otTotal: number;
     generalOtData: IGeneralOtData[];

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { UiHeaderComponent } from '@tapos/ui-header';
+import { UiHeaderComponent } from '@tapos/shared/ui-header';
 
 @Component({
     standalone: true,

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SectionType } from '@tapos/util-consts';
-import { UiSwitcherComponent } from '@tapos/ui-switcher';
+import { SectionType } from '@tapos/shared/util-consts';
+import { UiSwitcherComponent } from '@tapos/shared/ui-switcher';
 import { PrizmSidebarModule, PrizmSwitcherItem, PrizmSwitcherModule } from '@prizm-ui/components';
 
 @Component({

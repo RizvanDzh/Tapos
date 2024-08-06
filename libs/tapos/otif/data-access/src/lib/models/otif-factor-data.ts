@@ -1,4 +1,4 @@
-export interface IFactorData {
+export interface IOtifFactorData {
     time: string;
     reasonName: string;
     responsibilityName: string;

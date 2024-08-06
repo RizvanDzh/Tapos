@@ -1,9 +1,9 @@
-import { IAtotGeneralData } from './general-data';
+import { IOtifGeneralData } from './otif-general-data';
 
-export interface ITab {
+export interface IOtifTab {
     title: ETabTitle;
     url: ERouteTab;
-    data?: IAtotGeneralData;
+    data?: IOtifGeneralData;
 }
 
 export enum ETabTitle {
@@ -19,7 +19,7 @@ export enum ERouteTab {
     GRS = 'grs'
 }
 
-export const tabsSections: ITab[] = [
+export const tabsSections: IOtifTab[] = [
     {
         title: ETabTitle.ATOT,
         url: ERouteTab.ATOT

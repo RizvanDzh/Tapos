@@ -1,4 +1,4 @@
-export interface IIfData {
+export interface IOtifIfData {
     ifTotal: string;
     deviation: number;
     graphData: IIfGraphData[];
