@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AtotSectionComponent } from './atot-section.component';
+import { FeatureSectionComponent } from './feature-section.component';
 
-describe('AtotSectionComponent', () => {
-    let component: AtotSectionComponent;
-    let fixture: ComponentFixture<AtotSectionComponent>;
+describe('FeatureSectionComponent', () => {
+    let component: FeatureSectionComponent;
+    let fixture: ComponentFixture<FeatureSectionComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [AtotSectionComponent]
+            imports: [FeatureSectionComponent]
         }).compileComponents();
 
-        fixture = TestBed.createComponent(AtotSectionComponent);
+        fixture = TestBed.createComponent(FeatureSectionComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

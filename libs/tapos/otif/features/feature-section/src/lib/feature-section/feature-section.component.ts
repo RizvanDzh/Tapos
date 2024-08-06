@@ -5,14 +5,14 @@ import { UiSwitcherComponent } from '@tapos/shared/ui-switcher';
 import { PrizmSidebarModule, PrizmSwitcherItem, PrizmSwitcherModule } from '@prizm-ui/components';
 
 @Component({
-    selector: 'tapos-atot-section',
+    selector: 'tapos-feature-section',
     standalone: true,
     imports: [CommonModule, UiSwitcherComponent, PrizmSwitcherModule, PrizmSidebarModule],
-    templateUrl: './atot-section.component.html',
-    styleUrl: './atot-section.component.scss',
+    templateUrl: './feature-section.component.html',
+    styleUrl: './feature-section.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AtotSectionComponent {
+export class FeatureSectionComponent {
     @Input() public sectionType!: SectionType;
 
     public selectedIndex: number = 0;

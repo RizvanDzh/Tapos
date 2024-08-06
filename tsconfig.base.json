@@ -16,6 +16,7 @@
         "baseUrl": ".",
         "paths": {
             "@tapos/atot/feature-atot": ["libs/tapos/atot/features/feature-atot/src/index.ts"],
+            "@tapos/otif/feature-section": ["libs/tapos/otif/features/feature-section/src/index.ts"],
             "@tapos/mnpz/feature-mnpz": ["libs/tapos/mnpz/features/feature-mnpz/src/index.ts"],
             "@tapos/otif/data-access": ["libs/tapos/otif/data-access/src/index.ts"],
             "@tapos/otif/feature-otif": ["libs/tapos/otif/features/feature-otif/src/index.ts"],

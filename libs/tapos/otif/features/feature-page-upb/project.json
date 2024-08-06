@@ -1,20 +1,25 @@
 {
-    "name": "feature-page-upb",
-    "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
-    "sourceRoot": "libs/tapos/otif/features/feature-page-upb/src",
-    "prefix": "tapos",
-    "tags": [],
-    "projectType": "library",
-    "targets": {
-        "test": {
-            "executor": "@nx/jest:jest",
-            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
-            "options": {
-                "jestConfig": "libs/tapos/otif/features/feature-page-upb/jest.config.ts"
-            }
-        },
-        "lint": {
-            "executor": "@nx/eslint:lint"
-        }
+  "name": "feature-page-upb",
+  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/tapos/otif/features/feature-page-upb/src",
+  "prefix": "tapos",
+  "tags": [
+    "type:feature",
+    "scope:otif"
+  ],
+  "projectType": "library",
+  "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "libs/tapos/otif/features/feature-page-upb/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
     }
+  }
 }

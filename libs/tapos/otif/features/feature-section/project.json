@@ -1,7 +1,7 @@
 {
-  "name": "feature-otif",
+  "name": "feature-section",
   "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/tapos/otif/features/feature-otif/src",
+  "sourceRoot": "libs/tapos/otif/features/feature-section/src",
   "prefix": "tapos",
   "tags": [
     "type:feature",
@@ -15,7 +15,7 @@
         "{workspaceRoot}/coverage/{projectRoot}"
       ],
       "options": {
-        "jestConfig": "libs/tapos/otif/features/feature-otif/jest.config.ts"
+        "jestConfig": "libs/tapos/otif/features/feature-section/jest.config.ts"
       }
     },
     "lint": {

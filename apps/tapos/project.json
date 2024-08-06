@@ -4,7 +4,9 @@
   "projectType": "application",
   "prefix": "tapos",
   "sourceRoot": "apps/tapos/src",
-  "tags": [],
+  "tags": [
+    "scope:app"
+  ],
   "implicitDependencies": [
     "assets"
   ],
