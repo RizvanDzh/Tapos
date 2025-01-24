@@ -21,5 +21,6 @@ export const appRoutes: Route[] = [
         path: SECTIONS_URLS.get(ESectionTitles.MNPZ),
         // eslint-disable-next-line @typescript-eslint/typedef
         loadComponent: () => import('@tapos/mnpz/feature-mnpz').then((m) => m.FeatureMnpzComponent)
-    }
+    },
+    {}
 ];

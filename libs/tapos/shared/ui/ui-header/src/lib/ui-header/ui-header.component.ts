@@ -32,7 +32,7 @@ export class UiHeaderComponent implements OnInit {
 
     public isOpened: boolean = false;
 
-    public menuOptions: ISection[] = SECTIONS;
+    public menuSections: ISection[] = SECTIONS;
 
     constructor(private _theme: PrizmThemeService) {}
 
