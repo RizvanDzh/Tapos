@@ -9,8 +9,10 @@
             <span>СОП АТ</span>
         </div>
         <div class="header__group-page group-page" (click)="isOpened = !isOpened" [ngClass]="{ _opened: isOpened }">
-            <div *ngFor="let option of menuOptions" class="group-page__option" routerLinkActive="_active">
-                <a class="group-page__option-link" [routerLink]="'/' + option.url">{{ option.title }}</a>
+            <div *ngFor="let option of menuSections" class="group-page__option">
+                <a class="group-page__option-link" [routerLink]="option.routerLink" routerLinkActive="active">{{
+                    option.title
+                }}</a>
             </div>
             <prizm-icons
                 class="group-page__chevron"

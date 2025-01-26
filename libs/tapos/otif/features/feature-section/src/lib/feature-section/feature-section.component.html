@@ -1,0 +1,51 @@
+<div class="atot-section">
+    <div class="atot-section__header header">
+        <div class="header__graph-info graph-info">
+            <span class="graph-info__label">{{ sectionType }}</span>
+            <ng-container>
+                <div class="graph-info__general">
+                    <span class="graph-info__general-percent-main">64.36%</span>
+                    <span class="graph-info__general-percent-deviation">2.5%</span>
+                </div>
+            </ng-container>
+            <ng-template #dynamicTemplate>
+                <div class="graph-info__dynamic">
+                    <div class="graph-info__dynamic-item">
+                        <span class="graph-info__dynamic-flag"></span>
+                        <span class="graph-info__dynamic-label">Факт</span>
+                        <span class="graph-info__dynamic-amount">2014.35т</span>
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+        <div class="header__tabs">
+            <tapos-ui-switcher *ngIf="sectionType !== 'Ответственные за отклонения'"></tapos-ui-switcher>
+        </div>
+        <div class="header__switcher switcher">
+            <div class="switcher__legend">
+                <div class="switcher__legend-item">
+                    <div class="switcher__legend-flag"></div>
+                    <span class="switcher__legend-label">План</span>
+                    <span class="switcher__legend-amount">16</span>
+                </div>
+            </div>
+            <div class="switcher__button">
+                <div
+                    class="switcher__button-switcher"
+                    *ngIf="sectionType !== 'Ответственные за отклонения'; else buttonSidebar"
+                >
+                    <prizm-switcher
+                        [switchers]="sectionType === 'IF' ? switchersIf : switchersOt"
+                        [selectedSwitcherIdx]="selectedIndex"
+                        type="outer"
+                        size="m"
+                    ></prizm-switcher>
+                </div>
+                <ng-template #buttonSidebar>
+                    <button class="switcher__button-sidebar">Заявки на день</button>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+    <div class="atot-section__graph">график</div>
+</div>

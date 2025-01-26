@@ -3,13 +3,13 @@ export interface IOtifGeneralData {
 }
 
 export interface IGeneralData {
-    orifValue: number;
+    otifValue: number;
     averageValue: number;
     otifAdditionalValue: number;
-    gpaphData: IGraphDataValue[];
+    graphData: IGeneralGraphData[];
 }
 
-export interface IGraphDataValue {
+export interface IGeneralGraphData {
     time: string;
     value: number;
 }

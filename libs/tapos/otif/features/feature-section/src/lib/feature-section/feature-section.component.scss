@@ -1,0 +1,99 @@
+@use '@tapos/shared/styles' as styles;
+
+.atot-section {
+    background-color: #20222b;
+    height: 100%;
+    padding: 24px;
+    @include styles.flex-style($flex-direction: column, $gap: 16px);
+}
+
+.header {
+    padding: 4px 0;
+    @include styles.flex-style($justify-content: space-between, $align-items: center);
+}
+
+.graph-info {
+    @include styles.flex-style($align-items: center);
+
+    &__label {
+        @include styles.font-style($font-size: 20px, $line-height: 24px, $color: #777b92);
+    }
+
+    &__general {
+        margin-left: 8px;
+        @include styles.flex-style($align-items: center, $gap: 4px);
+
+        &-percent-main {
+            @include styles.font-style($font-size: 16px, $font-weight: 800);
+        }
+
+        &-percent-deviation {
+            @include styles.font-style($font-weight: 800, $color: #42e349);
+        }
+    }
+
+    &__dynamic {
+        margin-left: 16px;
+        @include styles.flex-style($gap: 16px);
+
+        &-item {
+            @include styles.flex-style($align-items: center, $gap: 8px);
+        }
+
+        &-flag {
+            height: 2px;
+            width: 16px;
+            background-color: #ffffff;
+        }
+
+        &-label {
+            @include styles.font-style($color: #777b92);
+        }
+
+        &-amount {
+            @include styles.font-style($font-size: 16px, $font-weight: 800);
+        }
+    }
+}
+
+.switcher {
+    @include styles.flex-style($align-items: center, $gap: 24px);
+
+    &__legend {
+        @include styles.flex-style($align-items: center, $gap: 24px);
+
+        &-item {
+            @include styles.flex-style($align-items: center, $gap: 8px);
+        }
+
+        &-flag {
+            width: 12px;
+            height: 12px;
+            background-color: #8d91a4;
+            border-radius: 2px;
+        }
+
+        &-label {
+            @include styles.font-style($font-size: 12px, $line-height: 16px, $font-weight: 400, $color: #777b92);
+        }
+
+        &-amount {
+            @include styles.font-style($font-size: 12px, $line-height: 16px, $font-weight: 400, $color: #a1a5b7);
+        }
+    }
+
+    &__button {
+        &-sidebar {
+            @include styles.font-style();
+            padding: 8px 16px;
+            background-color: #606580;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+
+            &:hover {
+                opacity: 90%;
+            }
+        }
+    }
+}

@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UtilIconsModule } from '@tapos/util-icons';
+import { UtilIconsModule } from '@tapos/shared/util-icons';
 import { FormsModule, ReactiveFormsModule, UntypedFormControl } from '@angular/forms';
 import { PrizmDay, PrizmInputLayoutDateComponent, PrizmInputTextModule } from '@prizm-ui/components';
 import { PrizmIconsComponent, PrizmIconsFullComponent } from '@prizm-ui/icons';
-import { ISection, SECTIONS } from '@tapos/util-consts';
+import { ISection, SECTIONS } from '@tapos/shared/util-consts';
 import { PrizmThemeService } from '@prizm-ui/theme';
 import { RouterLink, RouterModule } from '@angular/router';
 
@@ -32,7 +32,7 @@ export class UiHeaderComponent implements OnInit {
 
     public isOpened: boolean = false;
 
-    public menuOptions: ISection[] = SECTIONS;
+    public menuSections: ISection[] = SECTIONS;
 
     constructor(private _theme: PrizmThemeService) {}
 
