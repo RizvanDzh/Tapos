@@ -22,5 +22,9 @@ export const appRoutes: Route[] = [
         // eslint-disable-next-line @typescript-eslint/typedef
         loadComponent: () => import('@tapos/mnpz/feature-mnpz').then((m) => m.FeatureMnpzComponent)
     },
-    {}
+    {
+        path: SECTIONS_URLS.get(ESectionTitles.PET),
+        // eslint-disable-next-line @typescript-eslint/typedef
+        loadComponent: () => import('@tapos/pet/feature-pet').then((m) => m.FeaturePetComponent)
+    }
 ];
