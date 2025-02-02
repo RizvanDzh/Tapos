@@ -1,0 +1,11 @@
+<div class="pet-header">
+  <div class="pet-header__page-switcher page-switcher">
+    <div *ngFor="let option of petMenuSections" class="page-switcher__option">
+      <a class="page-switcher__option-link" [routerLink]="option.url" routerLinkActive="active" >
+        {{ option.title }}
+      </a>
+    </div>
+  </div>
+</div>
+
+

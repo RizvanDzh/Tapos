@@ -1,0 +1,23 @@
+{
+    "name": "util-pet-consts",
+    "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "libs/tapos/pet/util/util-pet-consts/src",
+    "prefix": "tapos",
+    "tags": [
+      "type:util",
+      "scope:pet"
+    ],
+    "projectType": "library",
+    "targets": {
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "libs/tapos/pet/util/util-pet-consts/jest.config.ts"
+            }
+        },
+        "lint": {
+            "executor": "@nx/eslint:lint"
+        }
+    }
+}

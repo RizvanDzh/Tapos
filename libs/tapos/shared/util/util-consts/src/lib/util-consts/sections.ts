@@ -3,7 +3,6 @@ export type SectionType = 'IF' | 'OT' | 'Ответственные за отк�
 export interface ISection {
     title: ESectionTitles;
     url: string;
-    routerLink: string;
 }
 
 export enum ESectionTitles {
@@ -25,22 +24,18 @@ export const SECTIONS_URLS: Map<string, string> = new Map(
 export const SECTIONS: ISection[] = [
   {
     title: ESectionTitles.OTIF,
-    url: SECTIONS_URLS.get(ESectionTitles.OTIF)!,
-    routerLink: '/' + SECTIONS_URLS.get(ESectionTitles.OTIF)!,
+    url: '/' + SECTIONS_URLS.get(ESectionTitles.OTIF)!,
   },
   {
     title: ESectionTitles.ATOT,
-    url: SECTIONS_URLS.get(ESectionTitles.ATOT)!,
-    routerLink: '/' + SECTIONS_URLS.get(ESectionTitles.ATOT)!,
+    url: '/' + SECTIONS_URLS.get(ESectionTitles.ATOT)!,
   },
   {
     title: ESectionTitles.MNPZ,
-    url: SECTIONS_URLS.get(ESectionTitles.MNPZ)!,
-    routerLink: '/' + SECTIONS_URLS.get(ESectionTitles.MNPZ)!,
+    url: '/' + SECTIONS_URLS.get(ESectionTitles.MNPZ)!,
   },
   {
     title: ESectionTitles.PET,
-    url: SECTIONS_URLS.get(ESectionTitles.PET)!,
-    routerLink: '/' + SECTIONS_URLS.get(ESectionTitles.PET)!,
+    url:  '/' + SECTIONS_URLS.get(ESectionTitles.PET)! + '/template-drivers-forms',
   }
 ];

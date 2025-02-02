@@ -1,0 +1,40 @@
+<form class="form">
+  <div class="form__field">
+    <label for="name">First Name</label>
+    <input [(ngModel)]="userInfo.firstName" name="firstName" type="text" id="name" placeholder="Enter your name" />
+  </div>
+  <div class="form__field">
+    <label for="last-name">Last Name</label>
+    <input [(ngModel)]="userInfo.lastName" name="lastName" type="text" id="last-name" placeholder="Enter your last name" />
+  </div>
+  <div class="form__field">
+    <label for="nickname">Nickname</label>
+    <input [(ngModel)]="userInfo.nickname" name="nickname" type="text" id="nickname" placeholder="Come up with a nickname" />
+  </div>
+  <div class="form__field">
+    <label for="email">Email</label>
+    <input [(ngModel)]="userInfo.email" name="email" type="email" id="email" placeholder="Provide your Email" />
+  </div>
+  <fieldset class="form__fieldset">
+    <legend>Address</legend>
+    <div class="form__field">
+      <label for="full-address">Full Address</label>
+      <input
+        [(ngModel)]="userInfo.fullAddress"
+        name="fullAddress"
+        type="text"
+        id="full-address"
+        placeholder="Street name and house number"
+      />
+    </div>
+    <div class="form__field">
+      <label for="city">City</label>
+      <input [(ngModel)]="userInfo.city" name="city" type="text" id="city" placeholder="City" />
+    </div>
+    <div class="form__field">
+      <label for="postcode">Post Code</label>
+      <input [(ngModel)]="userInfo.postCode" name="postCode" type="text" id="postCode" placeholder="Post Code" />
+    </div>
+  </fieldset>
+  <button class="form__button-save">Save</button>
+</form>

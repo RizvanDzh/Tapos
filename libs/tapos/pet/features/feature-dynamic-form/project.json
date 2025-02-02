@@ -1,0 +1,23 @@
+{
+    "name": "feature-dynamic-form",
+    "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "libs/tapos/pet/features/feature-dynamic-form/src",
+    "prefix": "tapos",
+    "tags": [
+      "scope:pet",
+      "type:feature"
+    ],
+    "projectType": "library",
+    "targets": {
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "libs/tapos/pet/features/feature-dynamic-form/jest.config.ts"
+            }
+        },
+        "lint": {
+            "executor": "@nx/eslint:lint"
+        }
+    }
+}

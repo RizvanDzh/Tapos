@@ -6,7 +6,7 @@ import { PrizmDay, PrizmInputLayoutDateComponent, PrizmInputTextModule } from '@
 import { PrizmIconsComponent, PrizmIconsFullComponent } from '@prizm-ui/icons';
 import { ISection, SECTIONS } from '@tapos/shared/util-consts';
 import { PrizmThemeService } from '@prizm-ui/theme';
-import { RouterLink, RouterModule } from '@angular/router';
+import { RouterLink, RouterModule} from '@angular/router';
 
 @Component({
     selector: 'tapos-ui-header',

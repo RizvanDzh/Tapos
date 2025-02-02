@@ -1,0 +1,23 @@
+@use '@tapos/shared/styles' as styles;
+
+
+.page-switcher {
+  display: flex;
+  gap: 20px;
+
+  &__option {
+  }
+
+  &__option-link {
+    display: inline-block;
+    border-radius: 4px;
+    padding: 4px;
+    color: #8d91a4;
+    text-decoration: none;
+    height: 100%;
+
+    &.active {
+      border: 1px solid #8d91a4;
+    }
+  }
+}
