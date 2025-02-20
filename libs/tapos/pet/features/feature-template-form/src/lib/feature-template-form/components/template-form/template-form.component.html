@@ -1,40 +1,117 @@
-<form class="form">
+<form class="form" #form="ngForm" (ngSubmit)="onSubmitForm(form, $event)" [ngFormOptions]="{ updateOn: 'blur' }">
+<!--  <p>Form model state</p>-->
+<!--  <pre>{{userInfo | json}}</pre>-->
   <div class="form__field">
     <label for="name">First Name</label>
-    <input [(ngModel)]="userInfo.firstName" name="firstName" type="text" id="name" placeholder="Enter your name" />
+    <input
+      [(ngModel)]="userInfo.firstName"
+      required
+      minlength="2"
+      taposPetBanWords="test"
+      #firstNameInput = "ngModel"
+      [ngModelOptions]="{name: 'firstName', updateOn: 'change'}"
+      type="text"
+      id="name"
+      placeholder="Enter your name" />
+    <div *ngIf="firstNameInput.dirty && firstNameInput.hasError('required')" class="input-error">The field is required</div>
+    <div
+      *ngIf="firstNameInput.dirty && firstNameInput.hasError('minlength')"
+      class="input-error">
+      The field must have at least {{firstNameInput.getError('minlength').requiredLength}} letters
+    </div>
+    <div
+      *ngIf="firstNameInput.hasError('taposPetBanWords')" class="input-error">
+      The value {{firstNameInput.getError('taposPetBanWords').bannedWords}} is not allowed
+    </div>
   </div>
   <div class="form__field">
     <label for="last-name">Last Name</label>
-    <input [(ngModel)]="userInfo.lastName" name="lastName" type="text" id="last-name" placeholder="Enter your last name" />
+    <input
+      [(ngModel)]="userInfo.lastName"
+      required
+      #lastNameInput = "ngModel"
+     [taposPetBanWords]="['test', 'test2', 'work']"
+      minlength="2"
+      name="lastName"
+      type="text"
+      id="last-name"
+      placeholder="Enter your last name" />
+    <div *ngIf="lastNameInput.dirty && lastNameInput.hasError('required')" class="input-error">The field is required</div>
+    <div *ngIf="lastNameInput.dirty && lastNameInput.hasError('minlength')" class="input-error">The field is too short</div>
+    <div
+      *ngIf="lastNameInput.hasError('taposPetBanWords')" class="input-error">
+      The value {{lastNameInput.getError('taposPetBanWords').bannedWords}} is not allowed
+    </div>
   </div>
   <div class="form__field">
     <label for="nickname">Nickname</label>
-    <input [(ngModel)]="userInfo.nickname" name="nickname" type="text" id="nickname" placeholder="Come up with a nickname" />
+    <input
+      [(ngModel)]="userInfo.nickname"
+      minlength="3"
+      required
+      name="nickname"
+      pattern="^[\w.]+$"
+      #nickNameInput='ngModel'
+      type="text"
+      id="nickname"
+      placeholder="Come up with a nickname" />
+    <div *ngIf="nickNameInput.dirty && nickNameInput.hasError('required')" class="input-error">The field is required</div>
+    <div *ngIf="nickNameInput.dirty && nickNameInput.hasError('minlength')" class="input-error">The field is too short</div>
+    <div *ngIf="nickNameInput.dirty && nickNameInput.hasError('pattern')" class="input-error">Only letters, number, _ and . are allowed</div>
   </div>
   <div class="form__field">
     <label for="email">Email</label>
-    <input [(ngModel)]="userInfo.email" name="email" type="email" id="email" placeholder="Provide your Email" />
+    <input
+      [(ngModel)]="userInfo.email"
+      #emailInput='ngModel'
+      email
+      required
+      name="email"
+      type="email"
+      id="email"
+      placeholder="Provide your Email" />
+    <div *ngIf="emailInput.dirty && emailInput.hasError('email')" class="input-error">The field should be in email format</div>
+    <div *ngIf="emailInput.dirty && emailInput.hasError('required')" class="input-error">The field is required</div>
   </div>
-  <fieldset class="form__fieldset">
+  <fieldset class="form__fieldset" ngModelGroup="address">
     <legend>Address</legend>
     <div class="form__field">
       <label for="full-address">Full Address</label>
       <input
         [(ngModel)]="userInfo.fullAddress"
+        required
         name="fullAddress"
+        #fullAddressInput= 'ngModel'
         type="text"
         id="full-address"
         placeholder="Street name and house number"
       />
+      <div *ngIf="fullAddressInput.dirty && fullAddressInput.hasError('required')" class="input-error">The field is required</div>
     </div>
     <div class="form__field">
       <label for="city">City</label>
-      <input [(ngModel)]="userInfo.city" name="city" type="text" id="city" placeholder="City" />
+      <input
+        [(ngModel)]="userInfo.city"
+        required
+        name="city"
+        #cityInput='ngModel'
+        type="text"
+        id="city"
+        placeholder="City" />
+      <div *ngIf="cityInput.dirty && cityInput.hasError('required')" class="input-error">The field is required</div>
     </div>
     <div class="form__field">
       <label for="postcode">Post Code</label>
-      <input [(ngModel)]="userInfo.postCode" name="postCode" type="text" id="postCode" placeholder="Post Code" />
+      <input
+        [(ngModel)]="userInfo.postCode"
+        required
+        name="postCode"
+        #postCodeInput='ngModel'
+        type="number"
+        id="postCode"
+        placeholder="Post Code" />
+      <div *ngIf="postCodeInput.dirty && postCodeInput.hasError('required')" class="input-error">The field is required</div>
     </div>
   </fieldset>
-  <button class="form__button-save">Save</button>
+  <button [disabled]="form.invalid" class="form__button-save">Save</button>
 </form>

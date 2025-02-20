@@ -26,7 +26,6 @@
 
   &__field input {
     padding: 10px 8px;
-    border: none;
     border-radius: 4px;
 
     &::placeholder {
@@ -43,11 +42,40 @@
   }
 
   &__button-save {
-    @include styles.font-style($font-weight: 600, $font-size: 16px, $color: #303340);
+    @include styles.font-style($font-weight: 600, $font-size: 16px, $color: var(--prizm-palette-0-dark));
     border-radius: 4px;
     border: none;
     padding: 6px;
-    background-color: #FF8C00;
+    background-color: var(--prizm-palette-orange-400-light);
     cursor: pointer;
   }
+}
+
+.ng-invalid.ng-dirty:not([ngModelGroup]):not(form) {
+  border: 1px solid var(--prizm-palette-red-600-light);
+}
+
+button[disabled] {
+  background-color: var(--prizm-palette-gray-h850-light) !important;
+  pointer-events: none;
+}
+
+@keyframes error-animation {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+.input-error {
+  color: var(--prizm-palette-red-600-light);
+  font-size: 12px;
+
+  animation-name: error-animation;
+  animation-duration: 300ms;
 }
