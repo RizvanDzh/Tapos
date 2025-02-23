@@ -1,7 +1,7 @@
-<form class="form" #form="ngForm" (ngSubmit)="onSubmitForm(form, $event)" [ngFormOptions]="{ updateOn: 'blur' }">
+<form class="form" #form="ngForm" (ngSubmit)="onSubmitForm(form, $event)" [ngFormOptions]="{ updateOn: 'change' }">
 <!--  <p>Form model state</p>-->
 <!--  <pre>{{userInfo | json}}</pre>-->
-  <div class="form__field">
+  <div class="form-field">
     <label for="name">First Name</label>
     <input
       [(ngModel)]="userInfo.firstName"
@@ -24,13 +24,12 @@
       The value {{firstNameInput.getError('taposPetBanWords').bannedWords}} is not allowed
     </div>
   </div>
-  <div class="form__field">
+  <div class="form-field">
     <label for="last-name">Last Name</label>
     <input
       [(ngModel)]="userInfo.lastName"
       required
       #lastNameInput = "ngModel"
-     [taposPetBanWords]="['test', 'test2', 'work']"
       minlength="2"
       name="lastName"
       type="text"
@@ -43,27 +42,32 @@
       The value {{lastNameInput.getError('taposPetBanWords').bannedWords}} is not allowed
     </div>
   </div>
-  <div class="form__field">
+  <div class="form-field">
     <label for="nickname">Nickname</label>
     <input
       [(ngModel)]="userInfo.nickname"
       minlength="3"
       required
+      [taposPetBanWords]="isAdult ? ['test', 'test2', 'work'] : []"
       name="nickname"
       pattern="^[\w.]+$"
-      #nickNameInput='ngModel'
+      #nickNameInput="ngModel"
       type="text"
       id="nickname"
       placeholder="Come up with a nickname" />
     <div *ngIf="nickNameInput.dirty && nickNameInput.hasError('required')" class="input-error">The field is required</div>
     <div *ngIf="nickNameInput.dirty && nickNameInput.hasError('minlength')" class="input-error">The field is too short</div>
     <div *ngIf="nickNameInput.dirty && nickNameInput.hasError('pattern')" class="input-error">Only letters, number, _ and . are allowed</div>
+    <div
+      *ngIf="nickNameInput.hasError('taposPetBanWords')" class="input-error">
+      The value {{nickNameInput.getError('taposPetBanWords').bannedWords}} is not allowed
+    </div>
   </div>
-  <div class="form__field">
+  <div class="form-field">
     <label for="email">Email</label>
     <input
       [(ngModel)]="userInfo.email"
-      #emailInput='ngModel'
+      #emailInput="ngModel"
       email
       required
       name="email"
@@ -73,45 +77,97 @@
     <div *ngIf="emailInput.dirty && emailInput.hasError('email')" class="input-error">The field should be in email format</div>
     <div *ngIf="emailInput.dirty && emailInput.hasError('required')" class="input-error">The field is required</div>
   </div>
-  <fieldset class="form__fieldset" ngModelGroup="address">
+  <div class="form-field-inline-group">
+    <div class="form-field form-field--small">
+      <label for="year-of-birth">Year of birth</label>
+      <select [(ngModel)]="userInfo.yearOfBirth" required id="year-of-birth" #yearOfBirth="ngModel" name="yearOfBirth">
+        <option *ngFor="let year of years" [value]="year">{{year}}</option>
+      </select>
+      <div *ngIf="yearOfBirth.dirty && yearOfBirth.hasError('required')" class="input-error">The field is required</div>
+    </div>
+      <div class="form-field form-field--small">
+        <label for="passport">Passport</label>
+        <input
+          [(ngModel)]="userInfo.passport"
+          type="text"
+          id="passport"
+          #passport="ngModel"
+          pattern="^[0-9]{10}$"
+          name="passport"
+          placeholder="Provide Passport Data"
+          [required]="isAdult"
+        >
+        <div *ngIf="passport.dirty && passport.hasError('pattern')" class="input-error">Invalid passport pattern</div>
+        <div *ngIf="passport.dirty && passport.hasError('required')" class="input-error">Required for adult</div>
+    </div>
+  </div>
+  <fieldset class="form-fieldset" ngModelGroup="address">
     <legend>Address</legend>
-    <div class="form__field">
+    <div class="form-field">
       <label for="full-address">Full Address</label>
       <input
         [(ngModel)]="userInfo.fullAddress"
         required
         name="fullAddress"
-        #fullAddressInput= 'ngModel'
+        #fullAddressInput="ngModel"
         type="text"
         id="full-address"
         placeholder="Street name and house number"
       />
       <div *ngIf="fullAddressInput.dirty && fullAddressInput.hasError('required')" class="input-error">The field is required</div>
     </div>
-    <div class="form__field">
+    <div class="form-field">
       <label for="city">City</label>
       <input
         [(ngModel)]="userInfo.city"
         required
         name="city"
-        #cityInput='ngModel'
+        #cityInput="ngModel"
         type="text"
         id="city"
         placeholder="City" />
       <div *ngIf="cityInput.dirty && cityInput.hasError('required')" class="input-error">The field is required</div>
     </div>
-    <div class="form__field">
+    <div class="form-field">
       <label for="postcode">Post Code</label>
       <input
         [(ngModel)]="userInfo.postCode"
         required
         name="postCode"
-        #postCodeInput='ngModel'
+        #postCodeInput="ngModel"
         type="number"
         id="postCode"
         placeholder="Post Code" />
       <div *ngIf="postCodeInput.dirty && postCodeInput.hasError('required')" class="input-error">The field is required</div>
     </div>
   </fieldset>
-  <button [disabled]="form.invalid" class="form__button-save">Save</button>
+  <fieldset class="form-fieldset" ngModelGroup="password" taposPetPasswordMatch>
+    <legend>User password</legend>
+    <div class="form-field">
+      <label for="password">Password</label>
+      <input
+        [(ngModel)]="userInfo.password"
+        type="password"
+        required
+        minlength="6"
+        name="password"
+        #password = "ngModel"
+        id="password"
+        placeholder="Enter User's password">
+      <div *ngIf="password.dirty && password.hasError('required')" class="input-error">The field is required</div>
+      <div *ngIf="password.dirty && password.hasError('minlength')" class="input-error">The field is too short</div>
+    </div>
+    <div class="form-field">
+      <label for="confirm-password">Confirm password</label>
+      <input
+        [(ngModel)]="userInfo.confirmPassword"
+        #confirmPassword = "ngModel"
+        type="password"
+        name="confirmPassword"
+        id="confirm-password"
+        placeholder="Confirm password">
+      <div *ngIf="confirmPassword.dirty && confirmPassword.hasError('taposPetPasswordMatch')" class="input-error">Password doesn't match</div>
+    </div>
+  </fieldset>
+  <button [disabled]="form.invalid" class="form-button-save">Save</button>
 </form>

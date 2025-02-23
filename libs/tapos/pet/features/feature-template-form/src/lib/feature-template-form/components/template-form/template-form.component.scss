@@ -14,26 +14,39 @@
   flex-direction: column;
   gap: 20px;
 
-  &__field {
+  &-field {
     display: flex;
     flex-direction: column;
-    gap: 4px
+    gap: 4px;
+
+    &--small {
+      width: 50%;
+    }
   }
 
-  &__field label {
+  &-field-inline-group {
+    display: flex;
+    gap: 10px;
+  }
+
+  &-field label {
     @include styles.font-style($font-weight: 400, $font-size: 16px);
   }
 
-  &__field input {
+  &-field input {
     padding: 10px 8px;
-    border-radius: 4px;
+    border-radius: 2px;
 
     &::placeholder {
       @include styles.font-style($font-weight: 300, $font-size: 14px, $color: #303340);
     }
   }
 
-  &__fieldset {
+  &-field select {
+    min-height: 39px;
+  }
+
+  &-fieldset {
     border-radius: 4px;
     padding: 12px 12px 30px 12px;
     display: flex;
@@ -41,7 +54,7 @@
     gap: 20px;
   }
 
-  &__button-save {
+  &-button-save {
     @include styles.font-style($font-weight: 600, $font-size: 16px, $color: var(--prizm-palette-0-dark));
     border-radius: 4px;
     border: none;
@@ -51,9 +64,14 @@
   }
 }
 
-.ng-invalid.ng-dirty:not([ngModelGroup]):not(form) {
+.ng-valid.ng-dirty:not([ngModelGroup]):not(form) {
+  border: 2px solid var(--prizm-palette-green-600-light);
+}
+
+.ng-invalid.ng-dirty:not([ngModelGroup="address"]):not(form) {
   border: 1px solid var(--prizm-palette-red-600-light);
 }
+
 
 button[disabled] {
   background-color: var(--prizm-palette-gray-h850-light) !important;

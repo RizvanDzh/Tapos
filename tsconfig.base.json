@@ -35,14 +35,14 @@
             "@tapos/pet/feature-template-form": ["libs/tapos/pet/features/feature-template-form/src/index.ts"],
             "@tapos/pet/ui-pet-header": ["libs/tapos/pet/ui/src/index.ts"],
             "@tapos/pet/util-pet-consts": ["libs/tapos/pet/util/util-pet-consts/src/index.ts"],
+            "@tapos/pet/util-pet-directives": ["libs/tapos/pet/util/util-pet-directives/src/index.ts"],
             "@tapos/shared/assets": ["libs/tapos/shared/assets/src/index.ts"],
             "@tapos/shared/data-access": ["libs/tapos/shared/data-access/src/index.ts"],
             "@tapos/shared/styles": ["libs/tapos/shared/styles/index.scss"],
             "@tapos/shared/ui-header": ["libs/tapos/shared/ui/ui-header/src/index.ts"],
             "@tapos/shared/ui-switcher": ["libs/tapos/shared/ui/ui-switcher/src/index.ts"],
             "@tapos/shared/util-consts": ["libs/tapos/shared/util/util-consts/src/index.ts"],
-            "@tapos/shared/util-icons": ["libs/tapos/shared/util/util-icons/src/index.ts"],
-            "@tapos/pet/util-pet-directives": ["libs/tapos/pet/util/util-pet-directives/src/index.ts"]
+            "@tapos/shared/util-icons": ["libs/tapos/shared/util/util-icons/src/index.ts"]
         }
     },
     "exclude": ["node_modules", "tmp"]
