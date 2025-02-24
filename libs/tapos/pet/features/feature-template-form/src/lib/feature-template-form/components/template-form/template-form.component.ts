@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import { IUserInfo } from '@tapos/pet/feature-pet-data-access';
@@ -15,14 +15,14 @@ import {
     styleUrl: './template-form.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TemplateFormComponent implements OnInit {
+export class TemplateFormComponent implements OnInit, AfterViewInit {
   public userInfo: IUserInfo = {
-    firstName: '',
-    lastName: '',
+    firstName: 'Rizvan',
+    lastName: 'Dzhamaldinov',
     nickname: '',
-    email: '',
+    email: '1234@gmail.com',
     yearOfBirth: 2022,
-    passport: '',
+    passport: '1234567821',
     fullAddress: '',
     city: '',
     postCode: 0,
@@ -30,8 +30,19 @@ export class TemplateFormComponent implements OnInit {
     confirmPassword: ''
   };
 
+  private _initialFormValue: unknown;
+
+  @ViewChild(NgForm)
+  private _ngFormDir!: NgForm;
+
   ngOnInit(): void {
     console.log('It is NgOnInit');
+  }
+
+  ngAfterViewInit(): void {
+    queueMicrotask(() => {
+      this._initialFormValue = this._ngFormDir.value;
+    })
   }
 
   public get isAdult(): boolean {
@@ -45,21 +56,13 @@ export class TemplateFormComponent implements OnInit {
     return Array(now - (now - 40)).fill('').map((_: number, idx: number) => now - idx)
   }
 
-  public onSubmitForm(form: NgForm, event: SubmitEvent): void {
-    console.log(form.value);
+  public onSubmitForm(e: SubmitEvent): void {
+    this._ngFormDir.resetForm(this._ngFormDir.value);
+    this._initialFormValue = this._ngFormDir.value;
+  }
 
-    this.userInfo = {
-      firstName: '',
-      lastName: '',
-      nickname: '',
-      email: '',
-      yearOfBirth: 2022,
-      passport: '',
-      fullAddress: '',
-      city: '',
-      postCode: 0,
-      password: '',
-      confirmPassword: ''
-    }
+  public onReset(e: Event): void {
+    e.preventDefault();
+    this._ngFormDir.resetForm(this._initialFormValue)
   }
 }

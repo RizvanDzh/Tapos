@@ -61,6 +61,24 @@
     padding: 6px;
     background-color: var(--prizm-palette-orange-400-light);
     cursor: pointer;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
+  &-button-reset {
+    @include styles.font-style($font-weight: 600, $font-size: 16px, $color: var(--prizm-palette-blue-h50-light));
+    border-radius: 4px;
+    border: 1px solid var(--prizm-palette-blue-h50-light);
+    padding: 6px;
+    background-color: transparent;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.7;
+    }
+
   }
 }
 

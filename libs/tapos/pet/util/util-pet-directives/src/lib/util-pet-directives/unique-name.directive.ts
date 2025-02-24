@@ -3,9 +3,7 @@ import {
   AbstractControl,
   AsyncValidator,
   NG_ASYNC_VALIDATORS,
-  NG_VALUE_ACCESSOR,
   ValidationErrors,
-  Validator
 } from '@angular/forms';
 import { Promise } from 'cypress/types/cy-bluebird';
 import { catchError, map, Observable, of, tap } from 'rxjs';
@@ -28,7 +26,7 @@ export class UniqueNameDirective implements AsyncValidator {
     return this._httpClient.get<unknown[]>(`https://jsonplaceholder.typicode.com/users?username=${control.value}`)
       .pipe(
         map((users: unknown[]) => users.length === 0 ? null : {taposPetUniqueName: {isTaken: true}}),
-        catchError(() => of({taposPetUniqueName: {unknownError: true}})),
+        catchError(() => of(({taposPetUniqueName: {unknownError: true}}))),
         tap(() => this._cdr.markForCheck())
       )
   }
