@@ -46,9 +46,11 @@
     <label for="nickname">Nickname</label>
     <input
       [(ngModel)]="userInfo.nickname"
+      [ngModelOptions]="{updateOn: 'blur'}"
       minlength="3"
       required
       [taposPetBanWords]="isAdult ? ['test', 'test2', 'work'] : []"
+      taposPetUniqueName
       name="nickname"
       pattern="^[\w.]+$"
       #nickNameInput="ngModel"
@@ -62,6 +64,8 @@
       *ngIf="nickNameInput.hasError('taposPetBanWords')" class="input-error">
       The value {{nickNameInput.getError('taposPetBanWords').bannedWords}} is not allowed
     </div>
+    <div *ngIf="nickNameInput.dirty && nickNameInput.hasError('taposPetUniqueName')" class="input-error">This nickname is taken</div>
+    <div *ngIf="nickNameInput.pending" class="input-info">Checking...</div>
   </div>
   <div class="form-field">
     <label for="email">Email</label>
@@ -169,5 +173,5 @@
       <div *ngIf="confirmPassword.dirty && confirmPassword.hasError('taposPetPasswordMatch')" class="input-error">Password doesn't match</div>
     </div>
   </fieldset>
-  <button [disabled]="form.invalid" class="form-button-save">Save</button>
+  <button [disabled]="form.invalid || form.pending" class="form-button-save">Save</button>
 </form>

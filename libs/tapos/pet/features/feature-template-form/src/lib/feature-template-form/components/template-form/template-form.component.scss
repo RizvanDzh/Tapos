@@ -78,7 +78,7 @@ button[disabled] {
   pointer-events: none;
 }
 
-@keyframes error-animation {
+@keyframes input-animation {
   from {
     opacity: 0;
     transform: translateY(-6px);
@@ -90,10 +90,18 @@ button[disabled] {
   }
 }
 
+@mixin input-message {
+  font-size: 12px;
+  animation-name: input-animation;
+  animation-duration: 300ms;
+}
+
 .input-error {
   color: var(--prizm-palette-red-600-light);
-  font-size: 12px;
+  @include input-message;
+}
 
-  animation-name: error-animation;
-  animation-duration: 300ms;
+.input-info {
+  color: var(--prizm-palette-blue-600-light);
+  @include input-message;
 }

@@ -3,11 +3,14 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import { IUserInfo } from '@tapos/pet/feature-pet-data-access';
 import { BanWordsDirective, PasswordMatchDirective } from '@tapos/pet/util-pet-directives';
+import {
+  UniqueNameDirective
+} from '../../../../../../../util/util-pet-directives/src/lib/util-pet-directives/unique-name.directive';
 
 @Component({
     selector: 'tapos-template-form',
     standalone: true,
-    imports: [CommonModule, FormsModule, ReactiveFormsModule, BanWordsDirective, PasswordMatchDirective],
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, BanWordsDirective, PasswordMatchDirective, UniqueNameDirective],
     templateUrl: './template-form.component.html',
     styleUrl: './template-form.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush
