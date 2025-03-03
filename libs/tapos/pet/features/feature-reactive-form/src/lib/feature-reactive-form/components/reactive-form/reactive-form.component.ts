@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormArray, FormControl, FormGroup, FormRecord, ReactiveFormsModule } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, FormRecord, ReactiveFormsModule } from '@angular/forms';
 import { UserSkillsService } from '@tapos/pet/feature-pet-data-access';
 import { Observable, tap } from 'rxjs';
 
@@ -19,28 +19,28 @@ export class ReactiveFormComponent implements OnInit {
   public skills$!: Observable<string[]>;
 
   // eslint-disable-next-line @typescript-eslint/typedef
-  public form = new FormGroup({
-    firstName: new FormControl('Rizvan'),
-    lastName: new FormControl('Dzhamaludinov'),
-    nickname: new FormControl('Rizotto6'),
-    email: new FormControl('1234@gmail.com'),
-    yearOfBirth: new FormControl(this.years[this.years.length - 1], { nonNullable: true }),
-    passport: new FormControl(''),
-    address: new FormGroup({
-      fullAddress: new FormControl(''),
-      city: new FormControl(''),
-      postcode: new FormControl(0),
+  public form = this._fb.group({
+    firstName: 'Rizvan',
+    lastName: 'Dzhamaludinov',
+    nickname: this._fb.nonNullable.control('Rizotto6'),
+    email: this._fb.nonNullable.control('1234@gmail.com'),
+    yearOfBirth: this._fb.nonNullable.control(this.years[this.years.length - 1]),
+    passport: '',
+    address: this._fb.nonNullable.group({
+      fullAddress: '',
+      city: '',
+      postcode: 0,
     }),
-    phones: new FormArray([
-      new FormGroup({
-        label: new FormControl(this.phoneLabels[0], {nonNullable: true}),
-        phoneNumber: new FormControl(''),
+    phones: this._fb.array([
+      this._fb.group({
+        label: this._fb.nonNullable.control(this.phoneLabels[0],),
+        phoneNumber: '',
       })
     ]),
-    skills: new FormRecord<FormControl<boolean>>({})
+    skills: this._fb.record<boolean>({})
   });
 
-  constructor(private _userSkillsService: UserSkillsService) {
+  constructor(private _userSkillsService: UserSkillsService, private _fb: FormBuilder) {
   }
 
 
