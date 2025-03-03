@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, FormRecord, ReactiveFormsModule } from '@angular/forms';
 import { UserSkillsService } from '@tapos/pet/feature-pet-data-access';
 import { Observable, tap } from 'rxjs';
 
@@ -37,7 +37,7 @@ export class ReactiveFormComponent implements OnInit {
         phoneNumber: new FormControl(''),
       })
     ]),
-    skills: new FormGroup<{[key: string]: FormControl<boolean>}>({})
+    skills: new FormRecord<FormControl<boolean>>({})
   });
 
   constructor(private _userSkillsService: UserSkillsService) {
