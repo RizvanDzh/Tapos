@@ -141,3 +141,9 @@ button[disabled] {
   color: var(--prizm-palette-red-600-light);
   padding: 6px;
 }
+
+.skills-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
