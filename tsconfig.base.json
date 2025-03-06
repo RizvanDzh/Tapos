@@ -42,7 +42,8 @@
             "@tapos/shared/ui-header": ["libs/tapos/shared/ui/ui-header/src/index.ts"],
             "@tapos/shared/ui-switcher": ["libs/tapos/shared/ui/ui-switcher/src/index.ts"],
             "@tapos/shared/util-consts": ["libs/tapos/shared/util/util-consts/src/index.ts"],
-            "@tapos/shared/util-icons": ["libs/tapos/shared/util/util-icons/src/index.ts"]
+            "@tapos/shared/util-icons": ["libs/tapos/shared/util/util-icons/src/index.ts"],
+            "@tapos/pet/util-pet-functions": ["libs/tapos/pet/util/util-pet-functions/src/index.ts"]
         }
     },
     "exclude": ["node_modules", "tmp"]

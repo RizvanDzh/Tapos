@@ -1,16 +1,17 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormArray, FormBuilder, FormControl, FormGroup, FormRecord, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserSkillsService } from '@tapos/pet/feature-pet-data-access';
 import { Observable, tap } from 'rxjs';
+import { banWords } from '@tapos/pet/util-pet-functions';
 
 @Component({
-    selector: 'tapos-reactive-form',
-    standalone: true,
+  selector: 'tapos-reactive-form',
+  standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-    templateUrl: './reactive-form.component.html',
-    styleUrl: './reactive-form.component.scss',
-    changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './reactive-form.component.html',
+  styleUrl: './reactive-form.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ReactiveFormComponent implements OnInit {
 
@@ -20,20 +21,24 @@ export class ReactiveFormComponent implements OnInit {
 
   // eslint-disable-next-line @typescript-eslint/typedef
   public form = this._fb.group({
-    firstName: 'Rizvan',
-    lastName: 'Dzhamaludinov',
-    nickname: this._fb.nonNullable.control('Rizotto6'),
-    email: this._fb.nonNullable.control('1234@gmail.com'),
-    yearOfBirth: this._fb.nonNullable.control(this.years[this.years.length - 1]),
-    passport: '',
+    firstName: ['Rizvan', [Validators.required, Validators.minLength(4), banWords(['dummy'])]],
+    lastName: ['Dzhamaludinov', [Validators.required, Validators.minLength(2)]],
+    nickname: this._fb.nonNullable.control('Rizotto6',
+      [
+        Validators.pattern(/^[\w.]+$/),
+        Validators.required,
+        Validators.minLength(2)]),
+    email: this._fb.nonNullable.control('1234@gmail.com', [Validators.required, Validators.email]),
+    yearOfBirth: this._fb.nonNullable.control(this.years[this.years.length - 1], Validators.required),
+    passport: ['', [Validators.pattern(/^[0-9]{10}$/), Validators.required]],
     address: this._fb.nonNullable.group({
-      fullAddress: '',
-      city: '',
-      postcode: 0,
+      fullAddress: ['', Validators.required],
+      city: ['', Validators.required],
+      postcode: [0, Validators.required],
     }),
     phones: this._fb.array([
       this._fb.group({
-        label: this._fb.nonNullable.control(this.phoneLabels[0],),
+        label: this._fb.nonNullable.control(this.phoneLabels[0]),
         phoneNumber: '',
       })
     ]),
