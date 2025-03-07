@@ -5,7 +5,7 @@
     <label for="name">First Name</label>
     <input type="text" id="name" placeholder="Enter your name" formControlName="firstName" />
     <ng-container *ngIf="form.controls.firstName as firstName">
-      <div class="input-error" *ngIf="firstName.dirty && firstName.hasError('required')">This field is required</div>
+      <div class="input-error" *ngIf="firstName.dirty && firstName.hasError('required')">The field is required</div>
       <div class="input-error" *ngIf="firstName.dirty && firstName.hasError('minlength')">The name must be at least {{firstName.getError('minlength').requiredLength}} characters</div>
       <div class="input-error" *ngIf="firstName.dirty && firstName.hasError('banWords')">
         The value {{firstName.getError('banWords').bannedWords}} is banned
@@ -24,7 +24,7 @@
     <label for="nickname">Nickname</label>
     <input type="text" id="nickname" placeholder="Come up with a nickname" formControlName="nickname" />
     <ng-container *ngIf="form.controls.nickname as nickName">
-      <div class="input-error" *ngIf="nickName.dirty && nickName.hasError('required')">The file is required</div>
+      <div class="input-error" *ngIf="nickName.dirty && nickName.hasError('required')">The field is required</div>
       <div class="input-error" *ngIf="nickName.dirty && nickName.hasError('minlength')">The name is too short</div>
       <div class="input-error" *ngIf="nickName.dirty && nickName.hasError('pattern')">Only letters, number, _ and . are allowed</div>
     </ng-container>
@@ -33,7 +33,7 @@
     <label for="email">Email</label>
     <input type="email" id="email" placeholder="Provide your Email" formControlName="email"/>
     <ng-container *ngIf="form.controls.email as email">
-      <div class="input-error" *ngIf="email.dirty && email.hasError('required')">The file is required</div>
+      <div class="input-error" *ngIf="email.dirty && email.hasError('required')">The field is required</div>
       <div class="input-error" *ngIf="email.dirty && email.hasError('email')">The field should be in email format</div>
     </ng-container>
   </div>
@@ -44,7 +44,7 @@
         <option *ngFor="let year of years" [value]="year" >{{year}}</option>
       </select>
       <ng-container *ngIf="form.controls.yearOfBirth as yearOfBirth">
-        <div class="input-error" *ngIf="yearOfBirth.dirty && yearOfBirth.hasError('required')">The file is required</div>
+        <div class="input-error" *ngIf="yearOfBirth.dirty && yearOfBirth.hasError('required')">The field is required</div>
       </ng-container>
     </div>
     <div class="form-field form-field--small">
@@ -56,8 +56,8 @@
         formControlName="passport"
       >
       <ng-container *ngIf="form.controls.passport as passport">
-        <div class="input-error" *ngIf="passport.dirty && passport.hasError('required')">The file is required</div>
-        <div class="input-error" *ngIf="passport.dirty && passport.hasError('pattern')">The file format is 4867878023</div>
+        <div class="input-error" *ngIf="passport.dirty && passport.hasError('required')">The field is required</div>
+        <div class="input-error" *ngIf="passport.dirty && passport.hasError('pattern')">The field format is 4867878023</div>
       </ng-container>
     </div>
   </div>
@@ -67,21 +67,21 @@
       <label for="full-address">Full Address</label>
       <input type="text" id="full-address" placeholder="Street name and house number" formControlName="fullAddress"/>
       <ng-container *ngIf="form.controls.address.controls.fullAddress as fullAddress">
-        <div class="input-error" *ngIf="fullAddress.dirty && fullAddress.hasError('required')">The file is required</div>
+        <div class="input-error" *ngIf="fullAddress.dirty && fullAddress.hasError('required')">The field is required</div>
       </ng-container>
     </div>
     <div class="form-field">
       <label for="city">City</label>
       <input type="text" id="city" placeholder="City" formControlName="city"/>
       <ng-container *ngIf="form.controls.address.controls.city as city">
-        <div class="input-error" *ngIf="city.dirty && city.hasError('required')">The file is required</div>
+        <div class="input-error" *ngIf="city.dirty && city.hasError('required')">The field is required</div>
       </ng-container>
     </div>
     <div class="form-field">
       <label for="postcode">Post Code</label>
       <input type="number" id="postCode" placeholder="Post Code" formControlName="postcode"/>
       <ng-container *ngIf="form.controls.address.controls.postcode as postcode">
-        <div class="input-error" *ngIf="postcode.dirty && postcode.hasError('required')">The file is required</div>
+        <div class="input-error" *ngIf="postcode.dirty && postcode.hasError('required')">The field is required</div>
       </ng-container>
     </div>
   </fieldset>
@@ -109,6 +109,26 @@
         <label [for]="skill">{{ skill | titlecase }}</label>
       </div>
     </ng-container>
+  </fieldset>
+  <fieldset class="form-fieldset" formGroupName="passwords">
+    <legend>Create Password</legend>
+    <div class="form-field">
+      <label for="password">Password</label>
+      <input type="password" id="password" formControlName="password" placeholder="Enter the password...">
+      <ng-container *ngIf="form.controls.passwords.controls.password as password">
+        <div class="input-error" *ngIf="password.dirty && password.hasError('required')">The field is required</div>
+        <div class="input-error" *ngIf="password.dirty && password.hasError('minlength')">The password must be at least {{password.getError('minlength').requiredLength}} characters</div>
+      </ng-container>
+    </div>
+    <div class="form-field">
+      <label for="confirm-password">Confirm Password</label>
+      <input type="password" id="confirm-password" formControlName="confirmPassword" placeholder="Enter the confirm password...">
+      <ng-container *ngIf="form.controls.passwords.controls.confirmPassword as confirmPassword">
+        <div class="input-error" *ngIf="confirmPassword.dirty && confirmPassword.hasError('passwordShouldMatch')">
+          The entered password doesn't match
+        </div>
+      </ng-container>
+    </div>
   </fieldset>
   <button class="form-button-save" [disabled]="form.invalid">Save</button>
 </form>

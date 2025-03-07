@@ -152,6 +152,6 @@ button[disabled] {
   border: 3px solid var(--prizm-palette-green-600-light);
 }
 
-.ng-invalid.ng-dirty:not([ngModelGroup="address"]):not([formGroupName]):not([formArrayName]):not(form) {
+.ng-invalid.ng-dirty:not([ngModelGroup="address"]):not([formGroupName="address"]):not([formArrayName]):not(form) {
   border: 1px solid var(--prizm-palette-red-600-light);
 }

@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserSkillsService } from '@tapos/pet/feature-pet-data-access';
 import { Observable, tap } from 'rxjs';
-import { banWords } from '@tapos/pet/util-pet-functions';
+import { banWords, passwordShouldMatch } from '@tapos/pet/util-pet-functions';
+
 
 @Component({
   selector: 'tapos-reactive-form',
@@ -42,7 +43,13 @@ export class ReactiveFormComponent implements OnInit {
         phoneNumber: '',
       })
     ]),
-    skills: this._fb.record<boolean>({})
+    skills: this._fb.record<boolean>({}),
+    passwords: this._fb.group({
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ''
+    }, {
+      validators: passwordShouldMatch
+    })
   });
 
   constructor(private _userSkillsService: UserSkillsService, private _fb: FormBuilder) {
