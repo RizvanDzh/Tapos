@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { UserSkillsService } from '@tapos/pet/feature-pet-data-access';
-import { Observable, startWith, Subject, takeUntil, tap } from 'rxjs';
+import { UniqueNameService, UserSkillsService } from '@tapos/pet/feature-pet-data-access';
+import { bufferCount, filter, Observable, startWith, Subject, takeUntil, tap } from 'rxjs';
 import { banWords, passwordShouldMatch } from '@tapos/pet/util-pet-functions';
 
 
@@ -26,11 +26,17 @@ export class ReactiveFormComponent implements OnInit, OnDestroy {
   public form = this._fb.group({
     firstName: ['Rizvan', [Validators.required, Validators.minLength(4), banWords(['dummy'])]],
     lastName: ['Dzhamaludinov', [Validators.required, Validators.minLength(2)]],
-    nickname: this._fb.nonNullable.control('Rizotto6',
-      [
+    nickname: this._fb.nonNullable.control('', {
+      validators: [
         Validators.pattern(/^[\w.]+$/),
         Validators.required,
-        Validators.minLength(2)]),
+        Validators.minLength(2)
+      ],
+      asyncValidators: [
+        this._uniqueName.validate.bind(this._uniqueName)
+      ],
+      updateOn: 'blur'
+    }),
     email: this._fb.nonNullable.control('1234@gmail.com', [Validators.required, Validators.email]),
     yearOfBirth: this._fb.nonNullable.control(this.years[this.years.length - 1], Validators.required),
     passport: ['', [Validators.pattern(/^[0-9]{10}$/)]],
@@ -54,7 +60,12 @@ export class ReactiveFormComponent implements OnInit, OnDestroy {
     })
   });
 
-  constructor(private _userSkillsService: UserSkillsService, private _fb: FormBuilder) {
+  constructor(
+    private _userSkillsService: UserSkillsService,
+    private _fb: FormBuilder,
+    private _uniqueName: UniqueNameService,
+    private _cdr: ChangeDetectorRef
+  )  {
   }
 
 
@@ -79,6 +90,14 @@ export class ReactiveFormComponent implements OnInit, OnDestroy {
           : this.form.controls.passport.removeValidators(Validators.required);
         this.form.controls.passport.updateValueAndValidity();
       })
+
+    this.form.statusChanges
+      .pipe(
+        bufferCount(2,1),
+        // eslint-disable-next-line @typescript-eslint/typedef
+        filter(([prevState]): boolean => prevState === 'PENDING'),
+        takeUntil(this._destroy)
+      ).subscribe(() => this._cdr.markForCheck())
 
     console.log('ngOnInit reactive form');
   }
