@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserSkillsService } from '@tapos/pet/feature-pet-data-access';
-import { Observable, tap } from 'rxjs';
+import { Observable, startWith, Subject, takeUntil, tap } from 'rxjs';
 import { banWords, passwordShouldMatch } from '@tapos/pet/util-pet-functions';
 
 
@@ -14,11 +14,13 @@ import { banWords, passwordShouldMatch } from '@tapos/pet/util-pet-functions';
   styleUrl: './reactive-form.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ReactiveFormComponent implements OnInit {
+export class ReactiveFormComponent implements OnInit, OnDestroy {
 
   public phoneLabels:string[] = ['Main', 'Home', 'Work'];
 
   public skills$!: Observable<string[]>;
+
+  private _destroy: Subject<void> = new Subject<void>();
 
   // eslint-disable-next-line @typescript-eslint/typedef
   public form = this._fb.group({
@@ -31,7 +33,7 @@ export class ReactiveFormComponent implements OnInit {
         Validators.minLength(2)]),
     email: this._fb.nonNullable.control('1234@gmail.com', [Validators.required, Validators.email]),
     yearOfBirth: this._fb.nonNullable.control(this.years[this.years.length - 1], Validators.required),
-    passport: ['', [Validators.pattern(/^[0-9]{10}$/), Validators.required]],
+    passport: ['', [Validators.pattern(/^[0-9]{10}$/)]],
     address: this._fb.nonNullable.group({
       fullAddress: ['', Validators.required],
       city: ['', Validators.required],
@@ -65,7 +67,25 @@ export class ReactiveFormComponent implements OnInit {
     this.skills$ = this._userSkillsService.getSkills().pipe(
       tap((skills: string[]) => this._buildSkillControls(skills)));
 
+    this.form.controls.yearOfBirth.valueChanges
+      .pipe(
+        tap(() => this.form.controls.passport.markAsDirty()),
+        startWith(this.form.controls.yearOfBirth.value),
+        takeUntil(this._destroy)
+      )
+      .subscribe((yearOfBirth: number) => {
+        this._isAdult(yearOfBirth)
+          ? this.form.controls.passport.setValidators(Validators.required)
+          : this.form.controls.passport.removeValidators(Validators.required);
+        this.form.controls.passport.updateValueAndValidity();
+      })
+
     console.log('ngOnInit reactive form');
+  }
+
+  public ngOnDestroy(): void {
+    this._destroy.next();
+    this._destroy.complete();
   }
 
   public addPhone(): void {
@@ -87,5 +107,10 @@ export class ReactiveFormComponent implements OnInit {
     skills.forEach((skill: string) => {
       this.form.controls.skills.addControl(skill, new FormControl(false, {nonNullable: true}));
     })
+  }
+
+  private _isAdult(yearOfBirth: number): boolean {
+    const now: number = new Date().getFullYear();
+    return now - yearOfBirth >= 18;
   }
 }
