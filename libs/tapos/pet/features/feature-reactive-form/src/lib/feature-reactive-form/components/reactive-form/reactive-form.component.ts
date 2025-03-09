@@ -1,6 +1,12 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup, FormGroupDirective,
+  ReactiveFormsModule,
+  Validators
+} from '@angular/forms';
 import { UniqueNameService, UserSkillsService } from '@tapos/pet/feature-pet-data-access';
 import { bufferCount, filter, Observable, startWith, Subject, takeUntil, tap } from 'rxjs';
 import { banWords, passwordShouldMatch } from '@tapos/pet/util-pet-functions';
@@ -20,12 +26,10 @@ export class ReactiveFormComponent implements OnInit, OnDestroy {
 
   public skills$!: Observable<string[]>;
 
-  private _destroy: Subject<void> = new Subject<void>();
-
   // eslint-disable-next-line @typescript-eslint/typedef
   public form = this._fb.group({
-    firstName: ['Rizvan', [Validators.required, Validators.minLength(4), banWords(['dummy'])]],
-    lastName: ['Dzhamaludinov', [Validators.required, Validators.minLength(2)]],
+    firstName: ['', [Validators.required, Validators.minLength(4), banWords(['dummy'])]],
+    lastName: ['', [Validators.required, Validators.minLength(2)]],
     nickname: this._fb.nonNullable.control('', {
       validators: [
         Validators.pattern(/^[\w.]+$/),
@@ -60,6 +64,12 @@ export class ReactiveFormComponent implements OnInit, OnDestroy {
     })
   });
 
+  private _destroy: Subject<void> = new Subject<void>();
+
+  private _initialFormValue: unknown;
+
+  @ViewChild(FormGroupDirective) private _formDir!: FormGroupDirective;
+
   constructor(
     private _userSkillsService: UserSkillsService,
     private _fb: FormBuilder,
@@ -75,8 +85,11 @@ export class ReactiveFormComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    this.skills$ = this._userSkillsService.getSkills().pipe(
-      tap((skills: string[]) => this._buildSkillControls(skills)));
+    this.skills$ = this._userSkillsService.getSkills()
+      .pipe(
+        tap((skills: string[]) => this._buildSkillControls(skills)),
+        tap(() => this._initialFormValue = this.form.value)
+      )
 
     this.form.controls.yearOfBirth.valueChanges
       .pipe(
@@ -120,6 +133,15 @@ export class ReactiveFormComponent implements OnInit, OnDestroy {
 
   public onSubmit(e: Event): void {
     console.log(this.form.value);
+    this._initialFormValue = this.form.value;
+    this._formDir.resetForm(this._initialFormValue);
+    // this.form.reset(); <-- doesn't reset ng-submitted status
+
+  }
+
+  public onReset(e: Event): void {
+    e.preventDefault();
+    this._formDir.resetForm(this._initialFormValue)
   }
 
   private _buildSkillControls(skills: string[]): void {
