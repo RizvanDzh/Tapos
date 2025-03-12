@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RatingPickerPageComponent } from './components/rating-picker-page.component';
+import { RatingPickerPageComponent } from './components/rating-picker-page/rating-picker-page.component';
 
 @Component({
     selector: 'tapos-feature-custom-rating-picker',

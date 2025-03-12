@@ -1,5 +1,6 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit($event)">
   <h3>Review</h3>
+  <tapos-rating-picker formControlName="reviewRating"></tapos-rating-picker>
   <div class="review-textarea" contenteditable formControlName="reviewText">
   </div>
   <button>Save</button>
