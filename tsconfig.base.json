@@ -16,10 +16,6 @@
         "baseUrl": ".",
         "paths": {
             "@tapos/atot/feature-atot": ["libs/tapos/atot/features/feature-atot/src/index.ts"],
-            "@tapos/feature-custom-rating-picker": [
-                "libs/tapos/pet/features/feature-custom-rating-picker/src/index.ts"
-            ],
-            "@tapos/feature-dynamic-form": ["libs/tapos/pet/features/feature-dynamic-form/src/index.ts"],
             "@tapos/mnpz/feature-mnpz": ["libs/tapos/mnpz/features/feature-mnpz/src/index.ts"],
             "@tapos/otif/data-access": ["libs/tapos/otif/data-access/src/index.ts"],
             "@tapos/otif/feature-otif": ["libs/tapos/otif/features/feature-otif/src/index.ts"],
@@ -28,6 +24,11 @@
             "@tapos/otif/feature-page-upb": ["libs/tapos/otif/features/feature-page-upb/src/index.ts"],
             "@tapos/otif/feature-section": ["libs/tapos/otif/features/feature-section/src/index.ts"],
             "@tapos/otif/ui-tabs": ["libs/tapos/otif/ui/ui-tabs/src/index.ts"],
+            "@tapos/pet/feature-custom-rating-picker": [
+                "libs/tapos/pet/features/feature-custom-rating-picker/src/index.ts"
+            ],
+            "@tapos/pet/feature-custom-select": ["libs/tapos/pet/features/feature-custom-select/src/index.ts"],
+            "@tapos/pet/feature-dynamic-form": ["libs/tapos/pet/features/feature-dynamic-form/src/index.ts"],
             "@tapos/pet/feature-forms-playground": ["libs/tapos/pet/features/feature-forms-playground/src/index.ts"],
             "@tapos/pet/feature-pet": ["libs/tapos/pet/features/feature-pet/src/index.ts"],
             "@tapos/pet/feature-pet-data-access": ["libs/tapos/pet/data-access/feature-pet-data-access/src/index.ts"],

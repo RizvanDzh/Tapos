@@ -7,6 +7,7 @@ export enum EPetSectionTitle {
   TemplateDriverForms = 'Template-Driver Forms',
   ReactiveForms = 'Reactive Forms',
   CustomRatingPicker = 'Custom Rating Picker',
+  CustomSelect = 'Custom Select',
   DynamicForms = 'Dynamic Forms',
 }
 
@@ -16,6 +17,7 @@ export const SECTIONS_PET_URLS: Map<string, string> = new Map<string, string>(
     [EPetSectionTitle.TemplateDriverForms]: 'template-drivers-forms',
     [EPetSectionTitle.ReactiveForms]: 'reactive-forms',
     [EPetSectionTitle.CustomRatingPicker]: 'custom-rating-picker',
+    [EPetSectionTitle.CustomSelect]: 'custom-select',
     [EPetSectionTitle.DynamicForms]: 'dynamic-forms',
   })
 );
@@ -33,6 +35,10 @@ export const SECTIONS_PET: IPetSection[] = [
   {
     title: EPetSectionTitle.CustomRatingPicker,
     url: SECTIONS_PET_URLS.get(EPetSectionTitle.CustomRatingPicker)!,
+  },
+  {
+    title: EPetSectionTitle.CustomSelect,
+    url: SECTIONS_PET_URLS.get(EPetSectionTitle.CustomSelect)!,
   },
   {
     title: EPetSectionTitle.DynamicForms,
