@@ -7,8 +7,9 @@
   gap: 4px;
   padding: 5px 10px;
   border: 3px solid #50546b;
-  border-radius: 4px;
+  border-radius: 10px;
   min-width: 250px;
+  background-color: #1b2336;
   &:hover {
     cursor: pointer;
     background-color: #151c2b;
@@ -34,4 +35,11 @@
   transition: transform 0.2s;
   transform-origin: left;
   width: 100%
+}
+.panel{
+  padding: 5px 10px;
+  border: 3px solid #50546b;
+  border-radius: 10px;
+  min-width: 250px;
+  background-color: #1b2336;
 }
