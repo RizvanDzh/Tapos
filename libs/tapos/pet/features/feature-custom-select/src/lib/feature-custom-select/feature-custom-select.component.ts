@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SelectComponent } from './components/select.component';
+import { SelectComponent } from './components/select/select.component';
 
 @Component({
     selector: 'tapos-feature-custom-select',
