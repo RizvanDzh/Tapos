@@ -1,4 +1,9 @@
 <h1 class="title">Custom Select Component Playground</h1>
-<tapos-select [label]="'Pick the User'"></tapos-select>
+<tapos-select [label]="'Pick the User'">
+  <tapos-option value="potato">Potato</tapos-option>
+  <tapos-option value="onion">Onion</tapos-option>
+  <tapos-option value="tomato">Tomato</tapos-option>
+  <tapos-option disabledReason="Too expensive" [isDisabled]="true" value="cucumber">Cucumber</tapos-option>
+</tapos-select>
 
 
