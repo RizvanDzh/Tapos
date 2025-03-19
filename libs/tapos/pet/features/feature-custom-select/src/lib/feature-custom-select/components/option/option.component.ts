@@ -20,7 +20,7 @@ import { CommonModule } from '@angular/common';
 export class OptionComponent {
   @Input() public value: string | null = null;
 
-  @Output() public selectedOption: EventEmitter<OptionComponent> = new EventEmitter();
+  @Output() public selectedOption: EventEmitter<OptionComponent> = new EventEmitter<OptionComponent>();
 
   @Input() public disabledReason: string = '';
 
@@ -32,12 +32,16 @@ export class OptionComponent {
   protected isSelected: boolean = false;
 
   @HostListener('click')
-  public select():void {
-    this.isSelected = true;
+  protected select():void {
+    this.highlightSelectedOption();
     this.selectedOption.emit(this)
   }
 
   public deselect():void {
     this.isSelected = false;
+  }
+
+  public highlightSelectedOption(): void {
+    this.isSelected = true;
   }
 }

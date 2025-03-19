@@ -12,5 +12,7 @@ import { OptionComponent } from './components/option/option.component';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FeatureCustomSelectComponent {
-
+  public onSelectionChange(event: string | null): void {
+    console.log(event);
+  }
 }
