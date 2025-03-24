@@ -1,5 +1,5 @@
 import {
-  ChangeDetectionStrategy,
+  ChangeDetectionStrategy, ChangeDetectorRef,
   Component,
   EventEmitter,
   HostBinding,
@@ -34,14 +34,18 @@ export class OptionComponent<T> {
   @HostListener('click')
   protected select():void {
     this.highlightSelectedOption();
-    this.selectedOption.emit(this)
+    this.selectedOption.emit(this);
   }
+
+  constructor(public cdr: ChangeDetectorRef) {}
 
   public deselect():void {
     this.isSelected = false;
+    this.cdr.markForCheck();
   }
 
   public highlightSelectedOption(): void {
     this.isSelected = true;
+    this.cdr.markForCheck();
   }
 }

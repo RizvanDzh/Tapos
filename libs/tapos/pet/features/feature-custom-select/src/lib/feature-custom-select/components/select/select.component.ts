@@ -5,15 +5,15 @@ import {
   ContentChildren,
   EventEmitter,
   HostListener,
-  Input, OnDestroy,
-  Output, QueryList
+  Input, OnChanges, OnDestroy,
+  Output, QueryList, SimpleChanges
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {OverlayModule} from '@angular/cdk/overlay'
 import { animate, state, style, transition, trigger, AnimationEvent } from '@angular/animations';
 import { OptionComponent } from '../option/option.component';
 import { SelectionChange, SelectionModel } from '@angular/cdk/collections';
-import { merge, startWith, Subject, switchMap, takeUntil } from 'rxjs';
+import { merge, startWith, Subject, switchMap, takeUntil, tap } from 'rxjs';
 
 export type SelectType<T> = T | null;
 
@@ -34,7 +34,7 @@ export type SelectType<T> = T | null;
   ]
 })
 
-export class SelectComponent<T> implements AfterContentInit, OnDestroy  {
+export class SelectComponent<T> implements OnChanges, AfterContentInit, OnDestroy  {
   @Input()
   public set value(val: SelectType<T>) {
     this.selectionModel.clear();
@@ -47,6 +47,10 @@ export class SelectComponent<T> implements AfterContentInit, OnDestroy  {
   public get value(): SelectType<T> {
     return this.selectionModel.selected[0] || null
   }
+
+  @Input() public displayWith: ((val: T) => string | number ) | null = null;
+
+  @Input() public compareWith: ((u1: T | null, u2: T | null) => boolean) = (u1: T | null, u2: T | null) => u1 === u2;
 
   @Input() public label: string = '';
 
@@ -73,16 +77,25 @@ export class SelectComponent<T> implements AfterContentInit, OnDestroy  {
   constructor(public cdr: ChangeDetectorRef) {
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes['compareWith']) {
+      this.selectionModel.compareWith = changes['compareWith'].currentValue;
+      this._highlightSelectedOption(this.value);
+    }
+  }
+
   ngAfterContentInit(): void {
     console.log(this._contentOptions);
     this._highlightSelectedOption(this.value);
 
     this.selectionModel.changed.subscribe((values: SelectionChange<T>) => {
       values.removed.forEach((rv: SelectType<T> ) => this._findOptionsByValue(rv)?.deselect());
+      values.added.forEach((av: SelectType<T> | null) => this._findOptionsByValue(av)?.highlightSelectedOption());
     })
 
     this._contentOptions.changes.pipe(
       startWith(this._contentOptions),
+      tap(() => queueMicrotask(() => this._highlightSelectedOption(this.value))),
       switchMap((options: OptionComponent<T>[]) => merge(...options.map((option: OptionComponent<T>) => option.selectedOption))),
       takeUntil(this._destroy$),
     ).subscribe((selectedOption: OptionComponent<T>) => {
@@ -100,6 +113,13 @@ export class SelectComponent<T> implements AfterContentInit, OnDestroy  {
     this.isOpen = false;
   }
 
+  protected get displayValue(): string | number | SelectType<T>  {
+    if(this.displayWith && this.value) {
+    return this.displayWith(this.value);
+    }
+    return this.value;
+  }
+
   public onPanelAnimationDone({fromState, toState}:  AnimationEvent): void {
     if(fromState === 'void' && toState === '*' && this.isOpen) {
       this.opened.emit();
@@ -114,7 +134,7 @@ export class SelectComponent<T> implements AfterContentInit, OnDestroy  {
   }
 
   private _findOptionsByValue(value: SelectType<T>): OptionComponent<T> | undefined {
-    return this._contentOptions && this._contentOptions.find((option: OptionComponent<T>) => option.value === value)
+    return this._contentOptions && this._contentOptions.find((option: OptionComponent<T>) => this.compareWith(option.value, value));
   }
 
   private _handleSelection(option: OptionComponent<T>): void {

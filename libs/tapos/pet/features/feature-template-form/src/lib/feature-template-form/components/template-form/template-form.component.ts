@@ -5,7 +5,7 @@ import { IUserInfo } from '@tapos/pet/feature-pet-data-access';
 import { BanWordsDirective, PasswordMatchDirective } from '@tapos/pet/util-pet-directives';
 import {
   UniqueNameDirective
-} from '../../../../../../../util/util-pet-directives/src/lib/util-pet-directives/unique-name.directive';
+} from '@tapos/pet/util-pet-directives';
 
 @Component({
     selector: 'tapos-template-form',

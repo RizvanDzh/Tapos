@@ -1,9 +1,14 @@
 <h1 class="title">Custom Select Component Playground</h1>
-<tapos-select (selectionChanged)="onSelectionChange($event)" [value]="defaultSelectedValue" [label]="'Pick the User'">
-  <tapos-option value="potato">Potato</tapos-option>
-  <tapos-option value="onion">Onion</tapos-option>
-  <tapos-option value="tomato">Tomato</tapos-option>
-  <tapos-option disabledReason="Too expensive" [isDisabled]="true" value="cucumber">Cucumber</tapos-option>
+<tapos-select
+  [displayWith]="displayWithFn"
+  [compareWith]="compareWithFn"
+  [value]="defaultSelectedValue"
+  [label]="'Pick the User'"
+  (selectionChanged)="onSelectionChange($event)"
+>
+  <div *ngFor="let user of users">
+    <tapos-option [value]="user" [isDisabled]="user.disabled">{{user.name}}</tapos-option>
+  </div>
 </tapos-select>
 
 
