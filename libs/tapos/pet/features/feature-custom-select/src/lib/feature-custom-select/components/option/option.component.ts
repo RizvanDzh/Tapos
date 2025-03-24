@@ -17,10 +17,10 @@ import { CommonModule } from '@angular/common';
     styleUrl: './option.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class OptionComponent {
-  @Input() public value: string | null = null;
+export class OptionComponent<T> {
+  @Input() public value: T | null = null;
 
-  @Output() public selectedOption: EventEmitter<OptionComponent> = new EventEmitter<OptionComponent>();
+  @Output() public selectedOption: EventEmitter<OptionComponent<T>> = new EventEmitter<OptionComponent<T>>();
 
   @Input() public disabledReason: string = '';
 

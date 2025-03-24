@@ -15,6 +15,8 @@ import { OptionComponent } from '../option/option.component';
 import { SelectionChange, SelectionModel } from '@angular/cdk/collections';
 import { merge, startWith, Subject, switchMap, takeUntil } from 'rxjs';
 
+export type SelectType<T> = T | null;
+
 @Component({
   selector: 'tapos-select',
   standalone: true,
@@ -31,16 +33,18 @@ import { merge, startWith, Subject, switchMap, takeUntil } from 'rxjs';
     ])
   ]
 })
-export class SelectComponent implements AfterContentInit, OnDestroy  {
+
+export class SelectComponent<T> implements AfterContentInit, OnDestroy  {
   @Input()
-  public set value(val: string | null) {
+  public set value(val: SelectType<T>) {
     this.selectionModel.clear();
     if(val) {
       this.selectionModel.select(val);
+      this._highlightSelectedOption(val);
     }
   }
 
-  public get value(): string | null {
+  public get value(): SelectType<T> {
     return this.selectionModel.selected[0] || null
   }
 
@@ -50,7 +54,7 @@ export class SelectComponent implements AfterContentInit, OnDestroy  {
 
   @Output() public readonly  opened: EventEmitter<void> = new EventEmitter<void>();
 
-  @Output() public selectionChanged: EventEmitter<string | null> = new EventEmitter<string | null>();
+  @Output() public selectionChanged: EventEmitter<SelectType<T>> = new EventEmitter<SelectType<T>>();
 
   @HostListener('click')
   public open (): void {
@@ -58,11 +62,11 @@ export class SelectComponent implements AfterContentInit, OnDestroy  {
   }
 
   @ContentChildren(OptionComponent, {descendants: true})
-  private _contentOptions!: QueryList<OptionComponent>;
+  private _contentOptions!: QueryList<OptionComponent<T>>;
 
   public isOpen: boolean = false;
 
-  public selectionModel:SelectionModel<string> = new SelectionModel<string>();
+  public selectionModel:SelectionModel<T> = new SelectionModel<T>();
 
   private _destroy$: Subject<void> = new Subject<void>();
 
@@ -73,15 +77,15 @@ export class SelectComponent implements AfterContentInit, OnDestroy  {
     console.log(this._contentOptions);
     this._highlightSelectedOption(this.value);
 
-    this.selectionModel.changed.subscribe((values: SelectionChange<string>) => {
-      values.removed.forEach((rv:string ) => this._findOptionsByValue(rv)?.deselect());
+    this.selectionModel.changed.subscribe((values: SelectionChange<T>) => {
+      values.removed.forEach((rv: SelectType<T> ) => this._findOptionsByValue(rv)?.deselect());
     })
 
     this._contentOptions.changes.pipe(
-      /*startWith(this._contentOptions),*/
-      switchMap((options: OptionComponent[]) => merge(...options.map((option: OptionComponent) => option.selectedOption))),
+      startWith(this._contentOptions),
+      switchMap((options: OptionComponent<T>[]) => merge(...options.map((option: OptionComponent<T>) => option.selectedOption))),
       takeUntil(this._destroy$),
-    ).subscribe((selectedOption: OptionComponent) => {
+    ).subscribe((selectedOption: OptionComponent<T>) => {
       this._handleSelection(selectedOption);
       this.cdr.markForCheck();
     })
@@ -105,15 +109,15 @@ export class SelectComponent implements AfterContentInit, OnDestroy  {
     }
   }
 
-  private _highlightSelectedOption(value: string | null): void {
+  private _highlightSelectedOption(value: SelectType<T>): void {
     this._findOptionsByValue(value)?.highlightSelectedOption();
   }
 
-  private _findOptionsByValue(value: string | null): OptionComponent | undefined {
-    return this._contentOptions && this._contentOptions.find((option: OptionComponent) => option.value === value)
+  private _findOptionsByValue(value: SelectType<T>): OptionComponent<T> | undefined {
+    return this._contentOptions && this._contentOptions.find((option: OptionComponent<T>) => option.value === value)
   }
 
-  private _handleSelection(option: OptionComponent): void {
+  private _handleSelection(option: OptionComponent<T>): void {
     if (option.value) {
       this.selectionModel.toggle(option.value);
       this.selectionChanged.emit(this.value);

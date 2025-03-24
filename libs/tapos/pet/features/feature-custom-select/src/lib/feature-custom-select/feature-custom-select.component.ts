@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SelectComponent } from './components/select/select.component';
 import { OptionComponent } from './components/option/option.component';
@@ -12,6 +12,8 @@ import { OptionComponent } from './components/option/option.component';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FeatureCustomSelectComponent {
+  public defaultSelectedValue: string = 'potato'
+
   public onSelectionChange(event: string | null): void {
     console.log(event);
   }
