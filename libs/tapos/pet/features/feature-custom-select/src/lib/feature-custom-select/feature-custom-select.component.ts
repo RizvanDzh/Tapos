@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SelectComponent } from './components/select/select.component';
+import { SelectComponent, SelectType } from './components/select/select.component';
 import { OptionComponent } from './components/option/option.component';
 import { User } from '@tapos/pet/feature-pet-data-access';
 
@@ -13,7 +13,10 @@ import { User } from '@tapos/pet/feature-pet-data-access';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FeatureCustomSelectComponent {
-  public defaultSelectedValue: User = new User(1, 'Peter Jackson', 'peter');
+  public defaultSelectedValue: SelectType<User> = [
+    new User(1, 'Peter Jackson', 'peter'),
+    new User(2, 'Steve Maiden', 'steve'),
+  ]
 
   public users: User[] = [
     new User(1, 'Peter Jackson', 'peter'),
@@ -34,7 +37,7 @@ export class FeatureCustomSelectComponent {
     }, 3000)
   }
 
-  public onSelectionChange(event: string | null | User): void {
+  public onSelectionChange(event: string | null | User | User[]): void {
     console.log(event);
   }
 

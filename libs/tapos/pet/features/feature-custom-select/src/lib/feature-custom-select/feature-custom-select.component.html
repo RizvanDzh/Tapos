@@ -1,9 +1,10 @@
 <h1 class="title">Custom Select Component Playground</h1>
 <tapos-select
+  label="Pick the User"
+  multiple
   [displayWith]="displayWithFn"
   [compareWith]="compareWithFn"
   [value]="defaultSelectedValue"
-  [label]="'Pick the User'"
   (selectionChanged)="onSelectionChange($event)"
 >
   <div *ngFor="let user of users">

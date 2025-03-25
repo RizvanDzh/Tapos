@@ -1,5 +1,5 @@
 import {
-  AfterContentInit,
+  AfterContentInit, Attribute,
   ChangeDetectionStrategy, ChangeDetectorRef,
   Component,
   ContentChildren,
@@ -14,8 +14,9 @@ import { animate, state, style, transition, trigger, AnimationEvent } from '@ang
 import { OptionComponent } from '../option/option.component';
 import { SelectionChange, SelectionModel } from '@angular/cdk/collections';
 import { merge, startWith, Subject, switchMap, takeUntil, tap } from 'rxjs';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
-export type SelectType<T> = T | null;
+export type SelectType<T> = T | T[] | null;
 
 @Component({
   selector: 'tapos-select',
@@ -39,13 +40,24 @@ export class SelectComponent<T> implements OnChanges, AfterContentInit, OnDestro
   public set value(val: SelectType<T>) {
     this.selectionModel.clear();
     if(val) {
-      this.selectionModel.select(val);
-      this._highlightSelectedOption(val);
+      if(Array.isArray(val)) {
+        this.selectionModel.select(...val);
+      } else {
+        this.selectionModel.select(val);
+      }
+      this._highlightSelectedOption();
     }
   }
 
   public get value(): SelectType<T> {
-    return this.selectionModel.selected[0] || null
+    if(this.selectionModel.isEmpty()) {
+      return null;
+    }
+    if(this.selectionModel.isMultipleSelection()) {
+      return this.selectionModel.selected;
+    }
+    return this.selectionModel.selected[0];
+
   }
 
   @Input() public displayWith: ((val: T) => string | number ) | null = null;
@@ -70,32 +82,32 @@ export class SelectComponent<T> implements OnChanges, AfterContentInit, OnDestro
 
   public isOpen: boolean = false;
 
-  public selectionModel:SelectionModel<T> = new SelectionModel<T>();
+  public selectionModel:SelectionModel<T> = new SelectionModel<T>(coerceBooleanProperty(this.multiple));
 
   private _destroy$: Subject<void> = new Subject<void>();
 
-  constructor(public cdr: ChangeDetectorRef) {
+  constructor(public cdr: ChangeDetectorRef, @Attribute('multiple') public multiple: string | null ) {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if(changes['compareWith']) {
       this.selectionModel.compareWith = changes['compareWith'].currentValue;
-      this._highlightSelectedOption(this.value);
+      this._highlightSelectedOption();
     }
   }
 
   ngAfterContentInit(): void {
     console.log(this._contentOptions);
-    this._highlightSelectedOption(this.value);
+    // this._highlightSelectedOption();
 
     this.selectionModel.changed.subscribe((values: SelectionChange<T>) => {
-      values.removed.forEach((rv: SelectType<T> ) => this._findOptionsByValue(rv)?.deselect());
-      values.added.forEach((av: SelectType<T> | null) => this._findOptionsByValue(av)?.highlightSelectedOption());
+      values.removed.forEach((rv: T | null ) => this._findOptionsByValue(rv)?.deselect());
+      values.added.forEach((av: T | null) => this._findOptionsByValue(av)?.highlightSelectedOption());
     })
 
     this._contentOptions.changes.pipe(
       startWith(this._contentOptions),
-      tap(() => queueMicrotask(() => this._highlightSelectedOption(this.value))),
+      tap(() => queueMicrotask(() => this._highlightSelectedOption())),
       switchMap((options: OptionComponent<T>[]) => merge(...options.map((option: OptionComponent<T>) => option.selectedOption))),
       takeUntil(this._destroy$),
     ).subscribe((selectedOption: OptionComponent<T>) => {
@@ -113,9 +125,13 @@ export class SelectComponent<T> implements OnChanges, AfterContentInit, OnDestro
     this.isOpen = false;
   }
 
-  protected get displayValue(): string | number | SelectType<T>  {
+  protected get displayValue(): string | number | SelectType<T> | (string | number)[]  {
     if(this.displayWith && this.value) {
-    return this.displayWith(this.value);
+      if(Array.isArray(this.value)) {
+        return this.value.map(this.displayWith);
+      }
+      return this.displayWith(this.value);
+
     }
     return this.value;
   }
@@ -129,11 +145,16 @@ export class SelectComponent<T> implements OnChanges, AfterContentInit, OnDestro
     }
   }
 
-  private _highlightSelectedOption(value: SelectType<T>): void {
-    this._findOptionsByValue(value)?.highlightSelectedOption();
+  private _highlightSelectedOption(): void {
+    const valuesWithUpdatedReferences: T[] = this.selectionModel.selected.map((value: T) => {
+        const correspondingOption: OptionComponent<T> | undefined = this._findOptionsByValue(value);
+        return correspondingOption ? correspondingOption.value! : value;
+    })
+    this.selectionModel.clear();
+    this.selectionModel.select(...valuesWithUpdatedReferences);
   }
 
-  private _findOptionsByValue(value: SelectType<T>): OptionComponent<T> | undefined {
+  private _findOptionsByValue(value: T | null): OptionComponent<T> | undefined {
     return this._contentOptions && this._contentOptions.find((option: OptionComponent<T>) => this.compareWith(option.value, value));
   }
 
@@ -142,7 +163,9 @@ export class SelectComponent<T> implements OnChanges, AfterContentInit, OnDestro
       this.selectionModel.toggle(option.value);
       this.selectionChanged.emit(this.value);
     }
-    this.close();
+    if(!this.selectionModel.isMultipleSelection()) {
+      this.close();
+    }
   }
 
 }
