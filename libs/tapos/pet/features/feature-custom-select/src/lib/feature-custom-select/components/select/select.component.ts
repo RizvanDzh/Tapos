@@ -145,6 +145,12 @@ export class SelectComponent<T> implements OnChanges, AfterContentInit, OnDestro
     }
   }
 
+  public clearSelectedValues(e: Event): void {
+    e.stopPropagation();
+    this.selectionModel.clear();
+    this.selectionChanged.emit(this.value);
+  }
+
   private _highlightSelectedOption(): void {
     const valuesWithUpdatedReferences: T[] = this.selectionModel.selected.map((value: T) => {
         const correspondingOption: OptionComponent<T> | undefined = this._findOptionsByValue(value);
