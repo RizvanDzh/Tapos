@@ -2,11 +2,11 @@ import {
   AfterContentInit, Attribute,
   ChangeDetectionStrategy, ChangeDetectorRef,
   Component,
-  ContentChildren,
-  EventEmitter,
+  ContentChildren, ElementRef,
+  EventEmitter, HostBinding,
   HostListener,
   Input, OnChanges, OnDestroy,
-  Output, QueryList, SimpleChanges
+  Output, QueryList, SimpleChanges, ViewChild
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {OverlayModule} from '@angular/cdk/overlay'
@@ -66,21 +66,33 @@ export class SelectComponent<T> implements OnChanges, AfterContentInit, OnDestro
 
   @Input() public label: string = '';
 
+  @Input() public isSearchable: boolean = false;
+
   @Output() public readonly closed: EventEmitter<void> = new EventEmitter<void>();
 
   @Output() public readonly  opened: EventEmitter<void> = new EventEmitter<void>();
 
   @Output() public selectionChanged: EventEmitter<SelectType<T>> = new EventEmitter<SelectType<T>>();
 
+  @Output() public searchChanged: EventEmitter<string> = new EventEmitter<string>();
+
   @HostListener('click')
   public open (): void {
     this.isOpen = true;
+    if(this.isSearchable) {
+      setTimeout(() => {
+        this._searchInputEl.nativeElement.focus();
+      }, 0)
+
+    }
   }
+  @HostBinding('class.select-panel-open')
+  public isOpen: boolean = false;
 
   @ContentChildren(OptionComponent, {descendants: true})
   private _contentOptions!: QueryList<OptionComponent<T>>;
 
-  public isOpen: boolean = false;
+  @ViewChild('input') private _searchInputEl!: ElementRef<HTMLInputElement>;
 
   public selectionModel:SelectionModel<T> = new SelectionModel<T>(coerceBooleanProperty(this.multiple));
 
@@ -136,13 +148,17 @@ export class SelectComponent<T> implements OnChanges, AfterContentInit, OnDestro
     return this.value;
   }
 
-  public onPanelAnimationDone({fromState, toState}:  AnimationEvent): void {
-    if(fromState === 'void' && toState === '*' && this.isOpen) {
+  protected onPanelAnimationDone({fromState, toState}:  AnimationEvent): void {
+    if(fromState === 'void' && this.isOpen) {
       this.opened.emit();
     }
-    if(fromState === '*' && toState === 'void' && !this.isOpen) {
+    if(toState === 'void' && !this.isOpen) {
       this.closed.emit();
     }
+  }
+
+  protected handleSearchInput(e: Event): void {
+    this.searchChanged.emit((e.target as HTMLInputElement).value);
   }
 
   public clearSelectedValues(e: Event): void {

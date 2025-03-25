@@ -17,6 +17,10 @@
       transform: scale(0.9);
     }
   }
+  &.select-panel-open {
+    position: relative;
+    z-index: 1001;
+  }
 }
 .label {
   font-weight: 800;
@@ -28,6 +32,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.search-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  color: #fff;
 }
 .selected-value {
   font-size: 16px;

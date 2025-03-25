@@ -25,20 +25,28 @@ export class FeatureCustomSelectComponent {
     new User(4, 'Phil Richard', 'phil', true)
   ]
 
+  public filteredUsers: User[] = this.users;
+
   constructor(private _cdr: ChangeDetectorRef) {
-    setTimeout(() => {
-      this.defaultSelectedValue = new User(2, 'Chris Tucker', 'chris');
-      this.users = [
-        new User(1, 'Peter Jackson', 'peter'),
-        new User(2, 'Chris Tucker', 'chris'),
-        new User(3, 'Phil Richard', 'phil', true)
-      ];
-      this._cdr.markForCheck();
-    }, 3000)
+    // setTimeout(() => {
+    //   this.defaultSelectedValue = new User(2, 'Chris Tucker', 'chris');
+    //   this.users = [
+    //     new User(1, 'Peter Jackson', 'peter'),
+    //     new User(2, 'Chris Tucker', 'chris'),
+    //     new User(3, 'Phil Richard', 'phil', true)
+    //   ];
+    //   this._cdr.markForCheck();
+    // }, 3000)
   }
 
   public onSelectionChange(event: string | null | User | User[]): void {
     console.log(event);
+  }
+
+  public onSearchChanged(queryValue: string): void {
+    this.filteredUsers = this.users.filter((user: User) => {
+      return user.name.toLowerCase().startsWith(queryValue.toLowerCase())
+    })
   }
 
   public displayWithFn(user: User): string {
