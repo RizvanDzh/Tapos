@@ -23,7 +23,13 @@ export class FeatureCustomSelectComponent implements OnInit {
     new User(1, 'Peter Jackson', 'peter'),
     new User(2, 'Steve Maiden', 'steve'),
     new User(3, 'Chris Tucker', 'chris'),
-    new User(4, 'Phil Richard', 'phil', true)
+    new User(4, 'Phil Richard', 'phil', true),
+    new User(5, 'Alex Clare', 'alex'),
+    new User(6, 'Nicolas Jackson', 'nicolas'),
+    new User(7, 'Cole Palmer', 'cole'),
+    new User(8, 'Jadon Sancho', 'jadon'),
+    new User(9, 'Marcus Rashford', 'marcus'),
+    new User(10, 'Jack Grealish', 'jack', true),
   ]
 
   public filteredUsers: User[] = this.users;

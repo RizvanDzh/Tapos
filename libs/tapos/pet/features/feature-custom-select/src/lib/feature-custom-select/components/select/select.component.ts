@@ -114,6 +114,9 @@ export class SelectComponent<T> implements OnChanges, AfterContentInit, OnDestro
     if((e.key === 'ArrowUp' || e.key === 'ArrowDown') && this.isOpen) {
       this._listKeyManager.onKeydown(e);
     }
+    if(e.key === 'Enter' && this.isOpen && this._listKeyManager.activeItem) {
+      this._handleSelection(this._listKeyManager.activeItem)
+    }
   }
 
   @HostBinding('class.select-panel-open')
@@ -158,6 +161,9 @@ export class SelectComponent<T> implements OnChanges, AfterContentInit, OnDestro
     console.log(this._contentOptions);
     // this._highlightSelectedOption();
     this._listKeyManager = new ActiveDescendantKeyManager(this._contentOptions).withWrap();
+    this._listKeyManager.change.pipe(takeUntil(this._destroy$)).subscribe((itemIndex: number) => {
+      this._contentOptions.get(itemIndex)?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    })
     this.selectionModel.changed.pipe(takeUntil(this._destroy$)).subscribe((values: SelectionChange<T>) => {
       values.removed.forEach((rv: T | null ) => this._findOptionsByValue(rv)?.deselect());
       values.added.forEach((av: T | null) => this._findOptionsByValue(av)?.highlightSelectedOption());

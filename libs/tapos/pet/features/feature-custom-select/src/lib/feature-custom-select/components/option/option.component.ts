@@ -1,6 +1,6 @@
 import {
   ChangeDetectionStrategy, ChangeDetectorRef,
-  Component,
+  Component, ElementRef,
   EventEmitter,
   HostBinding,
   HostListener,
@@ -41,25 +41,29 @@ export class OptionComponent<T> implements Highlightable {
     this.selectedOption.emit(this);
   }
 
-  constructor(public cdr: ChangeDetectorRef) {}
+  constructor(private _cdr: ChangeDetectorRef, private _hostElementRef: ElementRef<HTMLElement> ) {}
 
   public deselect():void {
     this.isSelected = false;
-    this.cdr.markForCheck();
+    this._cdr.markForCheck();
   }
 
   public highlightSelectedOption(): void {
     this.isSelected = true;
-    this.cdr.markForCheck();
+    this._cdr.markForCheck();
   }
 
   public setActiveStyles(): void {
     this.isActivated = true;
-    this.cdr.markForCheck();
+    this._cdr.markForCheck();
   }
 
   public setInactiveStyles(): void {
     this.isActivated = false;
-    this.cdr.markForCheck();
+    this._cdr.markForCheck();
+  }
+
+  public scrollIntoView(scrollIntoViewOptions: ScrollIntoViewOptions ): void {
+    this._hostElementRef.nativeElement.scrollIntoView(scrollIntoViewOptions);
   }
 }
