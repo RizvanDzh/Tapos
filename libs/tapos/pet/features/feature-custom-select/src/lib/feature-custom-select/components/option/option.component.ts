@@ -8,6 +8,7 @@ import {
   Output
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Highlightable } from '@angular/cdk/a11y';
 
 @Component({
     selector: 'tapos-option',
@@ -17,7 +18,7 @@ import { CommonModule } from '@angular/common';
     styleUrl: './option.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class OptionComponent<T> {
+export class OptionComponent<T> implements Highlightable {
   @Input() public value: T | null = null;
 
   @Output() public selectedOption: EventEmitter<OptionComponent<T>> = new EventEmitter<OptionComponent<T>>();
@@ -30,6 +31,9 @@ export class OptionComponent<T> {
 
   @HostBinding('class.selected')
   protected isSelected: boolean = false;
+
+  @HostBinding('class.active')
+  protected isActivated: boolean = false;
 
   @HostListener('click')
   protected select():void {
@@ -46,6 +50,16 @@ export class OptionComponent<T> {
 
   public highlightSelectedOption(): void {
     this.isSelected = true;
+    this.cdr.markForCheck();
+  }
+
+  public setActiveStyles(): void {
+    this.isActivated = true;
+    this.cdr.markForCheck();
+  }
+
+  public setInactiveStyles(): void {
+    this.isActivated = false;
     this.cdr.markForCheck();
   }
 }

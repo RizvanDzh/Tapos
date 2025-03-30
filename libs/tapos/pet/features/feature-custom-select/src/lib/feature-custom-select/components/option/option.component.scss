@@ -26,6 +26,9 @@
       transform: translateX(6px);
     }
   }
+  &.active {
+    border: #ffffff 2px dashed !important;
+  }
   .option-content {
     transition: transform 320ms ease-out;
   }

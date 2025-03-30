@@ -8,8 +8,7 @@
   (opened)="onSearchChanged('')"
   [displayWith]="displayWithFn"
   [compareWith]="compareWithFn"
-  [value]="defaultSelectedValue"
-  (selectionChanged)="onSelectionChange($event)"
+  [formControl]="defaultSelectedValue"
 >
   <div *ngFor="let user of filteredUsers">
     <tapos-option [value]="user" [isDisabled]="user.disabled">{{user.name}}</tapos-option>

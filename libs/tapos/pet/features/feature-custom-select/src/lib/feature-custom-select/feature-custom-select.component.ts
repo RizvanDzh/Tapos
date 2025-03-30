@@ -1,22 +1,23 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SelectComponent, SelectType } from './components/select/select.component';
 import { OptionComponent } from './components/option/option.component';
 import { User } from '@tapos/pet/feature-pet-data-access';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
     selector: 'tapos-feature-custom-select',
     standalone: true,
-    imports: [CommonModule, SelectComponent, OptionComponent],
+    imports: [CommonModule, SelectComponent, OptionComponent, ReactiveFormsModule],
     templateUrl: './feature-custom-select.component.html',
     styleUrl: './feature-custom-select.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FeatureCustomSelectComponent {
-  public defaultSelectedValue: SelectType<User> = [
+export class FeatureCustomSelectComponent implements OnInit {
+  public defaultSelectedValue: FormControl<SelectType<User>> =  new FormControl([
     new User(1, 'Peter Jackson', 'peter'),
     new User(2, 'Steve Maiden', 'steve'),
-  ]
+  ])
 
   public users: User[] = [
     new User(1, 'Peter Jackson', 'peter'),
@@ -39,6 +40,10 @@ export class FeatureCustomSelectComponent {
     // }, 3000)
   }
 
+  ngOnInit(): void {
+    this.defaultSelectedValue.valueChanges.subscribe(this.onSelectionChange)
+  }
+
   public onSelectionChange(event: string | null | User | User[]): void {
     console.log(event);
   }
@@ -56,4 +61,6 @@ export class FeatureCustomSelectComponent {
   public compareWithFn(user1: User | null, user2: User | null): boolean {
     return user1?.name === user2?.name;
   }
+
+
 }
