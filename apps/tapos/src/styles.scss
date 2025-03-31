@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import '@angular/cdk/overlay-prebuilt.css';
+
 * {
     margin: 0;
     box-sizing: border-box;
@@ -35,4 +37,29 @@ button {
     background-color: var(--prizm-text-icon-link);
     border-radius: 20px;
     border: 5px solid var(--prizm-background-fill-secondary);
+}
+
+.review-textarea {
+    background-color: #ffffff;
+    border-radius: 5px;
+    padding: 10px;
+    color: #20222b;
+    min-height: 74px;
+
+    h4 {
+        margin-bottom: 10px;
+
+        &:empty:before {
+            content: attr(data-placeholder);
+            opacity: 0.6;
+        }
+    }
+
+    p,
+    div {
+        &:empty:before {
+            content: attr(data-placeholder);
+            opacity: 0.6;
+        }
+    }
 }

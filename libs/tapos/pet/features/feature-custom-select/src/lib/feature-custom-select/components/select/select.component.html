@@ -1,0 +1,25 @@
+<div class="label">{{label}}</div>
+<div class="control" cdkOverlayOrigin #origin='cdkOverlayOrigin'>
+  <ng-container [ngSwitch]="isSearchable && isOpen">
+    <span *ngSwitchCase="false" class="selected-value">{{displayValue || 'Nothing is selected...'}}</span>
+    <input #input *ngSwitchCase="true" (input)="handleSearchInput($event)" type="text" class="search-input" placeholder="Enter the name...">
+  </ng-container>
+  <button *ngIf="value" (click)="clearSelectedValues($event)" class="clear-button">clear</button>
+  <span class="drop-down-icon">👇</span>
+</div>
+
+<ng-template
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="origin"
+  [cdkConnectedOverlayOpen]="isOpen"
+  [cdkConnectedOverlayOffsetX]="-11"
+  [cdkConnectedOverlayOffsetY]="12"
+  [cdkConnectedOverlayHasBackdrop]="true"
+  cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+  (backdropClick)="close()"
+  (detach)="close()"
+>
+  <div class="panel" [@dropDown] (@dropDown.done)="onPanelAnimationDone($event)">
+    <ng-content></ng-content>
+  </div>
+</ng-template>

@@ -1,0 +1,18 @@
+<h1 class="title">Custom Select Component Playground</h1>
+<tapos-select
+  label="Pick the User"
+  multiple
+  [isSearchable]="true"
+  (searchChanged)="onSearchChanged($event)"
+  (closed)="onSearchChanged('')"
+  (opened)="onSearchChanged('')"
+  [displayWith]="displayWithFn"
+  [compareWith]="compareWithFn"
+  [formControl]="defaultSelectedValue"
+>
+  <div *ngFor="let user of filteredUsers">
+    <tapos-option [value]="user" [isDisabled]="user.disabled">{{user.name}}</tapos-option>
+  </div>
+</tapos-select>
+
+

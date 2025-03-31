@@ -25,6 +25,6 @@ export const appRoutes: Route[] = [
     {
         path: SECTIONS_URLS.get(ESectionTitles.PET),
         // eslint-disable-next-line @typescript-eslint/typedef
-        loadComponent: () => import('@tapos/pet/feature-pet').then((m) => m.FeaturePetComponent)
+        loadChildren: () => import('@tapos/pet/feature-pet').then((m) => m.featurePetRoutes)
     }
 ];

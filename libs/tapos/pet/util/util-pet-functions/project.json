@@ -1,0 +1,23 @@
+{
+    "name": "util-pet-functions",
+    "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "libs/tapos/pet/util/util-pet-functions/src",
+    "prefix": "tapos",
+    "tags": [
+      "type:util",
+      "scope:pet"
+    ],
+    "projectType": "library",
+    "targets": {
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+            "options": {
+                "jestConfig": "libs/tapos/pet/util/util-pet-functions/jest.config.ts"
+            }
+        },
+        "lint": {
+            "executor": "@nx/eslint:lint"
+        }
+    }
+}
