@@ -1,0 +1,33 @@
+:host {
+  align-items: flex-start;
+  justify-content: flex-start;
+  display: flex;
+}
+
+.buttons {
+  max-width: 200px;
+  margin-right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .btn {
+    font-family: "Inter";
+    font-style: normal;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+    color: var(--prizm-palette-0-dark);
+    border-radius: 4px;
+    border: none;
+    padding: 6px;
+    background-color: var(--prizm-palette-orange-400-light);
+    cursor: pointer;
+  }
+}
+
+.dynamic-form-container {
+  background: #303340;
+  padding: 20px;
+  border-radius: 10px;
+}
