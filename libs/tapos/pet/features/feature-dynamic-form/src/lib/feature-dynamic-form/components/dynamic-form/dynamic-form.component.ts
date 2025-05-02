@@ -2,9 +2,10 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Observable, Subject, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { IDynamicControl, IDynamicFormConfig, TValidatorKeys } from '@tapos/pet/feature-pet-data-access';
+import { IDynamicControl, IDynamicFormConfig, TValidatorKeys } from '../../models/dynamic-forms.model'
 import { FormControl, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { banWords } from '@tapos/pet/util-pet-functions';
+import { DynamicControlResolver } from '../../services/dynamic-control-resolver/dynamic-control-resolver.service';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class DynamicFormComponent implements OnInit {
 
   public form!: FormGroup;
 
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient, protected dynamicControlResolver: DynamicControlResolver) {}
 
   ngOnInit(): void {
        this.formObservableConfig$ = this.formLoadingTrigger.pipe(
