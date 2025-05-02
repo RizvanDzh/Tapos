@@ -2,8 +2,9 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Observable, Subject, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { IDynamicFormConfig } from '@tapos/pet/feature-pet-data-access';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { IDynamicControl, IDynamicFormConfig, TValidatorKeys } from '@tapos/pet/feature-pet-data-access';
+import { FormControl, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
+import { banWords } from '@tapos/pet/util-pet-functions';
 
 
 @Component({
@@ -33,8 +34,33 @@ export class DynamicFormComponent implements OnInit {
 
   private _buildForm(controls: IDynamicFormConfig['controls']): void {
     this.form = new FormGroup({});
-    Object.keys(controls).forEach((key: string) => this.form.addControl(key, new FormControl(controls[key].value)))
-    console.log(this.form.value);
+    Object.keys(controls).forEach((key: string) => {
+      const validators: ValidatorFn[] = this._resolveValidators(controls[key]);
+      this.form.addControl(key, new FormControl(controls[key].value, validators));
+    })
+  }
+
+  private _resolveValidators({validators = {}}: IDynamicControl): ValidatorFn[] {
+    // eslint-disable-next-line @typescript-eslint/array-type
+    return (Object.keys(validators) as Array<keyof typeof validators>).map((key: TValidatorKeys) => {
+      // eslint-disable-next-line @typescript-eslint/typedef
+      const validatorValue = validators[key];
+      if (key === "required") {
+        return Validators.required;
+      }
+      if (key === "email") {
+        return Validators.email;
+      }
+      if(key === 'minLength' &&  typeof validatorValue === 'number') {
+        return Validators.minLength(validatorValue);
+      }
+
+      if(key === 'banWords' && Array.isArray(validatorValue)) {
+        return banWords(validatorValue);
+      }
+
+      return Validators.nullValidator;
+    })
   }
 
   public onSubmit(): void {

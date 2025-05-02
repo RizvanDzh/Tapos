@@ -5,7 +5,12 @@
       "controlType": "input",
       "type": "text",
       "label": "Full Name",
-      "value": ""
+      "value": "",
+      "validators": {
+        "required": true,
+        "minLength": 2,
+        "banWords": ["test", "dumb", "clown"]
+      }
     },
     "phone": {
       "controlType": "input",
