@@ -1,12 +1,15 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CONTROL_DATA, IControlData } from '../../control-data.token';
 
 @Component({
     selector: 'tapos-dynamic-input',
     standalone: true,
     imports: [CommonModule],
-    templateUrl: './dynamic-input.component.html',
-    styleUrl: './dynamic-input.component.scss',
+    template: `<input [type]="control.config.type" [id]="control.controlKey" [value]="control.config.value">`,
+    styles: [],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DynamicInputComponent {}
+export class DynamicInputComponent {
+  public control: IControlData = inject(CONTROL_DATA)
+}

@@ -7,7 +7,9 @@
     <h3 class="form-heading">{{formConfig.description}}</h3>
     <div class="form-field" *ngFor="let control of formConfig.controls | keyvalue">
       <label [for]="control.key">{{control.value.label}}</label>
-      <ng-container [ngComponentOutlet]="dynamicControlResolver.resolve(control.value.controlType)"></ng-container>
+      <ng-container
+        [ngComponentOutlet]="dynamicControlResolver.resolve(control.value.controlType)"
+        [ngComponentOutletInjector]="control.key | controlInjector:control.value"></ng-container>
 <!--      <ng-container [ngSwitch]="control.value.controlType">-->
 <!--        <input [formControlName]="control.key" *ngSwitchCase="'input'" [type]="control.value.type" [id]="control.key" [value]="control.value.value">-->
 <!--        <ng-container *ngSwitchCase="'select'">-->

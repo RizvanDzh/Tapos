@@ -6,12 +6,13 @@ import { IDynamicControl, IDynamicFormConfig, TValidatorKeys } from '../../model
 import { FormControl, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { banWords } from '@tapos/pet/util-pet-functions';
 import { DynamicControlResolver } from '../../services/dynamic-control-resolver/dynamic-control-resolver.service';
+import { ControlInjector } from '../../pipes/control-injector/control-injector.pipe';
 
 
 @Component({
     selector: 'tapos-dynamic-form',
     standalone: true,
-    imports: [CommonModule, ReactiveFormsModule],
+    imports: [CommonModule, ReactiveFormsModule, ControlInjector],
     templateUrl: './dynamic-form.component.html',
     styleUrl: './dynamic-form.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush
