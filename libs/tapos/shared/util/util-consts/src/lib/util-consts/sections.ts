@@ -36,6 +36,6 @@ export const SECTIONS: ISection[] = [
   },
   {
     title: ESectionTitles.PET,
-    url:  '/' + SECTIONS_URLS.get(ESectionTitles.PET)! + '/template-drivers-forms',
+    url:  '/' + SECTIONS_URLS.get(ESectionTitles.PET)!,
   }
 ];
