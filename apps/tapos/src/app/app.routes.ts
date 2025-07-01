@@ -5,6 +5,7 @@ import { FeatureTemplateFormComponent } from '@tapos/pet/feature-template-form';
 import { FeatureReactiveFormComponent } from '@tapos/pet/feature-reactive-form';
 import { FeatureCustomRatingPickerComponent } from '@tapos/pet/feature-custom-rating-picker';
 import { FeatureCustomSelectComponent } from '@tapos/pet/feature-custom-select';
+import { FeatureDynamicFormComponent } from '@tapos/pet/feature-dynamic-form';
 
 export const appRoutes: Route[] = [
     {
