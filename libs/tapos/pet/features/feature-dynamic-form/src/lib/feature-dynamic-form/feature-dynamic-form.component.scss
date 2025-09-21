@@ -1,0 +1,12 @@
+:host {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  background-color: #1b2336;
+  min-height: calc(100vh - 140px);
+  border-radius: 5px;
+}
+
+.title {
+  margin-bottom: 15px;
+}

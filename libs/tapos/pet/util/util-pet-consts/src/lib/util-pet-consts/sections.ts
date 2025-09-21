@@ -26,7 +26,7 @@ export const SECTIONS_PET_URLS: Map<string, string> = new Map<string, string>(
 export const SECTIONS_PET: IPetSection[] = [
   {
     title: EPetSectionTitle.TemplateDriverForms,
-    url: SECTIONS_PET_URLS.get(EPetSectionTitle.TemplateDriverForms)!,
+    url: '/pet',
   },
   {
     title: EPetSectionTitle.ReactiveForms,

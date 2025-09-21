@@ -1,6 +1,11 @@
 import { Route } from '@angular/router';
 import { ESectionTitles, SECTIONS_URLS } from '@tapos/shared/util-consts';
 import { FeatureOtifComponent } from '@tapos/otif/feature-otif';
+import { FeatureTemplateFormComponent } from '@tapos/pet/feature-template-form';
+import { FeatureReactiveFormComponent } from '@tapos/pet/feature-reactive-form';
+import { FeatureCustomRatingPickerComponent } from '@tapos/pet/feature-custom-rating-picker';
+import { FeatureCustomSelectComponent } from '@tapos/pet/feature-custom-select';
+import { FeatureDynamicFormComponent } from '@tapos/pet/feature-dynamic-form';
 
 export const appRoutes: Route[] = [
     {
@@ -25,6 +30,28 @@ export const appRoutes: Route[] = [
     {
         path: SECTIONS_URLS.get(ESectionTitles.PET),
         // eslint-disable-next-line @typescript-eslint/typedef
-        loadChildren: () => import('@tapos/pet/feature-pet').then((m) => m.featurePetRoutes)
+        loadComponent: () => import('@tapos/pet/feature-pet').then((m) => m.FeaturePetComponent),
+        children: [
+            {
+                path: '',
+                component: FeatureTemplateFormComponent
+            },
+            {
+                path: 'reactive-forms',
+                component: FeatureReactiveFormComponent
+            },
+            {
+                path: 'custom-rating-picker',
+                component: FeatureCustomRatingPickerComponent
+            },
+            {
+                path: 'custom-select',
+                component: FeatureCustomSelectComponent
+            },
+            {
+                path: 'dynamic-forms',
+                component: FeatureDynamicFormComponent
+            }
+        ]
     }
 ];
